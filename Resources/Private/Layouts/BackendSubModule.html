@@ -1,0 +1,13 @@
+<div class="t3-content container well">
+	<ul class="breadcrumb">
+		<f:for each="{moduleBreadcrumb}" key="path" as="name" iteration="iterator">
+			<li>
+				<t:link.module path="{path}">{name}</t:link.module>
+				<f:if condition="{iterator.isLast}"><f:else><span class="divider">&gt;</span></f:else></f:if>
+			</li>
+		</f:for>
+	</ul>
+
+	<h1>{moduleConfiguration.label}</h1>
+	<f:render section="Content" />
+</div>

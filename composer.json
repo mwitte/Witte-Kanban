@@ -1,0 +1,14 @@
+{
+"name": "witte/kanban",
+"type": "typo3-flow-package",
+"description": "",
+"version": "0.0.1-a1",
+"require": {
+"typo3\/flow":"*"
+},
+"autoload": {
+"psr-0": {
+"Witte\\Kanban": "Classes"
+}
+}
+}
