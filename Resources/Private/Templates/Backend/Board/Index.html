@@ -1,0 +1,58 @@
+{namespace t=TYPO3\TYPO3\ViewHelpers}
+<f:layout name="BackendSubModule" />
+
+<f:section name="Content">
+	<div class="row t3-module-container">
+		<div class="span11">
+			<legend>List of Kanban boards
+			</legend>
+			<div class="row-fluid">
+				<div class="span6">
+					<label class="control-label">Title</label>
+				</div>
+				<div class="span2">
+					<label class="control-label">Created</label>
+				</div>
+				<div class="span3">
+					<label class="control-label">Actions</label>
+				</div>
+			</div>
+			<f:if condition="{boards}">
+				<f:then>
+					<f:for each="{boards}" as="board">
+						<div class="row-fluid">
+							<div class="span6">
+								<f:link.action class="btn btn-primary t3-button" action="show" arguments="{board: board}">
+									<i class="icon-info-sign icon-white"></i> Show
+								</f:link.action>
+								<f:link.action action="show" arguments="{board: board}">
+									<f:format.crop maxCharacters="50">
+										{board.title}
+									</f:format.crop>
+								</f:link.action>
+							</div>
+							<div class="span2">
+								<f:format.date format="d.m.Y - H:i">{board.created}</f:format.date>
+							</div>
+							<div class="span3">
+								<f:link.action class="btn btn-warning t3-button" action="edit" arguments="{board: board}">
+									<i class="legend icon-pencil icon-white"></i> Edit
+								</f:link.action>
+								<f:link.action class="btn btn-danger t3-button" action="delete" arguments="{board: board}">
+									<i class="icon-trash icon-white"></i> Delete
+								</f:link.action>
+							</div>
+						</div>
+					</f:for>
+				</f:then>
+			<f:else>
+				<p>No boards created yet.</p>
+			</f:else>
+			</f:if>
+		</div>
+	</div>
+	<div class="form-actions form-footer">
+		<t:link.module path="management" class="btn t3-button">Back</t:link.module>
+		<f:link.action class="btn btn-primary t3-button" action="new">Create a new board</f:link.action>
+	</div>
+</f:section>

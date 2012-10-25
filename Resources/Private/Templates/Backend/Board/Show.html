@@ -1,0 +1,32 @@
+{namespace t=TYPO3\TYPO3\ViewHelpers}
+<f:layout name="BackendSubModule" />
+
+<f:section name="Content">
+	<div class="row t3-module-container">
+		<div class="span11">
+			<legend>
+				Kanban board {board.title}
+			</legend>
+			<div class="row-fluid">
+				<f:for each="{board.columns}" as="column">
+					<div class="span{columnWidth}">
+						<h4>{column.title}</h4>
+						<f:if condition="{column.limitValue} != 0">
+							{column.limitValue}
+						</f:if>
+					</div>
+				</f:for>
+			</div>
+			<div class="row-fluid">
+				<f:for each="{board.columns}" as="column">
+					<div class="span{columnWidth}">
+						Ticket
+					</div>
+				</f:for>
+			</div>
+		</div>
+	</div>
+	<div class="form-actions form-footer">
+		<f:link.action class="btn t3-button" action="index">Back</f:link.action>
+	</div>
+</f:section>

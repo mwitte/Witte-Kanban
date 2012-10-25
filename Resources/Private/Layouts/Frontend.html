@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{namespace typo3=TYPO3\TYPO3\ViewHelpers}
+{namespace ts=TYPO3\TypoScript\ViewHelpers}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="DC.title" content="" />
+	<meta name="DC.creator" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Kanban!!</title>
+
+	<link rel="stylesheet" href="../../../Public/Stylesheets/bootstrap.css" media="all" />
+	<link rel="stylesheet" href="../../../Public/Stylesheets/bootstrap-responsive.css" media="all" />
+	<link rel="stylesheet" href="../../../Public/Stylesheets/layout.css" media="all" />
+
+
+	<script src="../../../Public/JavaScript/jquery-1.8.2.js"></script>
+	<script src="../../../Public/JavaScript/bootstrap.js"></script>
+
+</head>
+<body>
+<f:render partial="Navbar" arguments="{_all}"/>
+<div class="container-fluid">
+
+	<f:flashMessages as="flashMessages">
+		<f:for each="{flashMessages}" as="flashMessage">
+			<div class="alert">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				{flashMessage}
+			</div>
+		</f:for>
+	</f:flashMessages>
+	<f:render section="Content" />
+
+</div>
+</body>
+</html>

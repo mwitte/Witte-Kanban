@@ -1,0 +1,30 @@
+{namespace t=TYPO3\TYPO3\ViewHelpers}
+<f:layout name="Frontend" />
+
+<f:section name="Content">
+	<div class="row-fluid">
+		<div class="span12">
+			<legend>
+				Kanban board {board.title}
+			</legend>
+			<div class="row-fluid">
+				<f:for each="{board.superiorColumns}" as="superiorColumn">
+					<div class="span{columnWidth}">
+						<div class="row-fluid">
+							<h4>{superiorColumn.title}</h4>
+							<f:if condition="{superiorColumn.limitValue} != 0">
+								{superiorColumn.limitValue}
+							</f:if>
+						</div>
+						<div class="row-fluid">
+							Tickets
+						</div>
+					</div>
+				</f:for>
+			</div>
+		</div>
+	</div>
+	<div class="form-actions form-footer">
+		<f:link.action class="btn t3-button" action="index">Back</f:link.action>
+	</div>
+</f:section>
