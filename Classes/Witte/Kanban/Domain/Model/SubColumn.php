@@ -51,6 +51,12 @@ class SubColumn {
 	 */
 	protected $tickets;
 
+	/**
+	 * @Flow\Inject
+	 * @var \Witte\Kanban\Domain\Service\SubColumnService
+	 */
+	protected $subColumnService;
+
 	public function __construct(){
 		$this->setSort(0);
 		$this->created = new \DateTime();
@@ -136,7 +142,7 @@ class SubColumn {
 	}
 
 	/**
-	 * @return \Doctrine\Common\Collections\Collection
+	 * @return \Doctrine\Common\Collections\Collection<\Witte\Kanban\Domain\Model\Ticket>
 	 */
 	public function getTickets()
 	{
@@ -154,7 +160,34 @@ class SubColumn {
 	 * @param Ticket $ticket
 	 */
 	public function removeTicket(Ticket $ticket){
-		$this->tickets->remove($ticket);
+		$this->tickets->removeElement($ticket);
+	}
+
+	/**
+	 * @return float
+	 */
+	public function getColumnWith(){
+		return $this->subColumnService->getQuotientBySuperiorColumn($this->superiorColumn);
+	}
+
+	public function getIsFirst(){
+		if($this->getSuperiorColumn()->getBoard()->getSuperiorColumns()->first() ==
+			$this->getSuperiorColumn() &&
+			$this->getSuperiorColumn()->getSubColumns()->first() == $this ){
+			return TRUE;
+		}else{
+			return FALSE;
+		}
+	}
+
+	public function getIsLast(){
+		if($this->getSuperiorColumn()->getBoard()->getSuperiorColumns()->last() ==
+			$this->getSuperiorColumn() &&
+			$this->getSuperiorColumn()->getSubColumns()->last() == $this ){
+			return TRUE;
+		}else{
+			return FALSE;
+		}
 	}
 }
 ?>

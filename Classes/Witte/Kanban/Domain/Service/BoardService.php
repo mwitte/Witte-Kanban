@@ -17,7 +17,7 @@ use \Witte\Kanban\Domain\Service\AbstractService;
 /**
  * Service
  *
- * @Flow\Scope("prototype")
+ * @Flow\Scope("singleton")
  */
 class BoardService extends AbstractService {
 

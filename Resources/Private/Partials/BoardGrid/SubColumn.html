@@ -1,0 +1,8 @@
+<div class="span{subColumn.columnWith -> f:format.number(decimals: 0)}">
+	<f:if condition="{subColumn.superiorColumn.subColumns -> f:count()} > 1">
+		<h5>{subColumn.title}</h5>
+	</f:if>
+	<f:for each="{subColumn.tickets}" as="ticket">
+		<f:render partial="BoardGrid/Ticket" arguments="{ticket: ticket, subColumn: subColumn}"/>
+	</f:for>
+</div>

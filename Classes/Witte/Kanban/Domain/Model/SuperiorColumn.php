@@ -52,6 +52,12 @@ class SuperiorColumn {
 	protected $subColumns;
 
 	/**
+	 * @Flow\Inject
+	 * @var \Witte\Kanban\Domain\Service\SuperiorColumnService
+	 */
+	protected $superiorColumnService;
+
+	/**
 	 * The created
 	 * @var \DateTime
 	 */
@@ -150,6 +156,14 @@ class SuperiorColumn {
 	}
 
 	/**
+	 * @return \Witte\Kanban\Domain\Model\SubColumn
+	 */
+	public function getFirstSubColumn()
+	{
+		return $this->subColumns->first();
+	}
+
+	/**
 	 * @param SubColumn $subColumn
 	 */
 	public function addSubColumn(SubColumn $subColumn){
@@ -160,7 +174,7 @@ class SuperiorColumn {
 	 * @param SubColumn $subColumn
 	 */
 	public function removeSubColumn(SubColumn $subColumn){
-		$this->subColumns->remove($subColumn);
+		$this->subColumns->removeElement($subColumn);
 	}
 
 	/**
@@ -177,6 +191,21 @@ class SuperiorColumn {
 	public function getCreated()
 	{
 		return $this->created;
+	}
+
+	/**
+	 * @return float
+	 */
+	public function getColumnWith(){
+		return $this->superiorColumnService->getQuotientByBoard($this->board);
+	}
+
+	public function getIsFirst(){
+		return $this->superiorColumnService->isSuperiorColumnFirst($this);
+	}
+
+	public function getIsLast(){
+		return $this->superiorColumnService->isSuperiorColumnLast($this);
 	}
 
 }

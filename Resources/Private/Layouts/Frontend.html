@@ -3,6 +3,7 @@
 {namespace ts=TYPO3\TypoScript\ViewHelpers}
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+	<f:base />
 	<meta charset="utf-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="description" content="" />
@@ -24,7 +25,6 @@
 <body>
 <f:render partial="Navbar" arguments="{_all}"/>
 <div class="container-fluid">
-
 	<f:flashMessages as="flashMessages">
 		<f:for each="{flashMessages}" as="flashMessage">
 			<div class="alert">
@@ -33,8 +33,13 @@
 			</div>
 		</f:for>
 	</f:flashMessages>
-	<f:render section="Content" />
-
+	<f:render section="Content"/>
 </div>
+<f:render partial="Dialogs" arguments="{_all}"/>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('a[rel=tooltip]').tooltip();
+	});
+</script>
 </body>
 </html>

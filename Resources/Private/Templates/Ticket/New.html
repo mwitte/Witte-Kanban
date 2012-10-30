@@ -1,0 +1,29 @@
+<f:layout name="Frontend" />
+
+<f:section name="Content">
+
+	<div class="row-fluid">
+		<div class="span12">
+			<f:form action="create" arguments="{board: board}" controller="Ticket" name="newTicket" class="form-horizontal">
+				<legend>Create a new ticket {board.title}</legend>
+				<div class="control-group">
+					<label class="control-label" for="title">Title</label>
+					<div class="controls">
+						<f:form.textfield property="title" id="title" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="description">Description</label>
+					<div class="controls">
+						<f:form.textfield property="description" id="description" />
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<f:form.submit value="Create" class="btn btn-success" />
+					</div>
+				</div>
+			</f:form>
+		</div>
+	</div>
+</f:section>

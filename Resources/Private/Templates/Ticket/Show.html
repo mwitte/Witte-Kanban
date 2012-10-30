@@ -1,0 +1,17 @@
+<f:layout name="Frontend" />
+
+<f:section name="Content">
+
+	<div class="row-fluid">
+		<div class="span12">
+			<h1>{ticket.title}</h1>
+			<p>
+				<f:format.date>{ticket.created}</f:format.date>
+			</p>
+			<p>
+				<f:format.nl2br>{ticket.description}</f:format.nl2br>
+			</p>
+
+		</div>
+	</div>
+</f:section>

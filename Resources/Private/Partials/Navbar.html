@@ -1,4 +1,4 @@
-<div class="navbar">
+<div class="navbar navbar-inverse">
 	<div class="navbar-inner">
 		<div class="container">
 
@@ -10,39 +10,68 @@
 			</a>
 
 			<!-- Be sure to leave the brand out there if you want it shown -->
-			<f:link.action class="brand" action="index" controller="Board">W:Kanban</f:link.action>
+			<f:link.action class="brand" action="index" controller="Base">W:Kanban</f:link.action>
 
 			<!-- Everything you want hidden at 940px or less, place within here -->
 			<div class="nav-collapse">
 				<ul class="nav">
+					<li class="divider-vertical"></li>
 					<f:if condition="{boards}">
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<f:for each="{boards}" as="board">
-								<li>
-									<f:link.action action="show" arguments="{board: board}">
-										<f:format.crop maxCharacters="50">
-											{board.title}
-										</f:format.crop>
-									</f:link.action>
+						<f:if condition="{boards -> f:count()} < 4">
+							<f:then>
+								<f:for each="{boards}" as="board">
+									<li>
+										<f:link.action action="show" controller="Board" arguments="{board: board}">
+											<f:format.crop maxCharacters="50">
+												{board.title}
+											</f:format.crop>
+										</f:link.action>
+									</li>
+								</f:for>
+							</f:then>
+							<f:else>
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
+									<ul class="dropdown-menu">
+										<f:for each="{boards}" as="board">
+											<li>
+												<f:link.action action="show" controller="Board" arguments="{board: board}">
+													<f:format.crop maxCharacters="50">
+														{board.title}
+													</f:format.crop>
+												</f:link.action>
+											</li>
+										</f:for>
+									</ul>
 								</li>
-							</f:for>
-						</ul>
-					</li>
+							</f:else>
+						</f:if>
+					</f:if>
+					<f:if condition="{board}">
+						<li>
+							<p class="navbar-text lead">
+								<f:link.action action="show" controller="Board" arguments="{board: board}">
+									<f:format.crop maxCharacters="50">
+										{board.title}
+									</f:format.crop>
+								</f:link.action>
+							</p>
+						</li>
 					</f:if>
 				</ul>
-
 				<ul class="nav pull-right">
-					<li class="divider-vertical"></li>
-					<li>
-						<f:link.action  action="new">Create a new board</f:link.action>
-					</li>
+					<f:if condition="{board}">
+						<li>
+							<f:link.action action="edit" controller="Board" arguments="{board: board}">
+								Edit board
+							</f:link.action>
+						</li>
+						<li>
+							<a data-toggle="modal" href="#createTicket">Create a Ticket</a>
+						</li>
+					</f:if>
 				</ul>
-
-
 			</div>
-
 		</div>
 	</div>
 </div>

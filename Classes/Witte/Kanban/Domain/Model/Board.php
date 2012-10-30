@@ -27,7 +27,7 @@ class Board {
 	 * The superiorColumns contained in this board
 	 *
 	 * @var \Doctrine\Common\Collections\Collection<\Witte\Kanban\Domain\Model\SuperiorColumn>
-	 * @ORM\OneToMany(mappedBy="board", cascade={"remove"})
+	 * @ORM\OneToMany(mappedBy="board", cascade={"remove", "persist"})
 	 * @ORM\OrderBy({"sort" = "ASC"})
 	 */
 	protected $superiorColumns;
@@ -93,7 +93,7 @@ class Board {
 	 * @param SuperiorColumn $superiorColumn
 	 */
 	public function removeSuperiorColumn(SuperiorColumn $superiorColumn){
-		$this->superiorColumns->remove($superiorColumn);
+		$this->superiorColumns->removeElement($superiorColumn);
 	}
 
 	/**

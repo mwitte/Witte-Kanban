@@ -37,6 +37,12 @@ class Ticket {
 	protected $created;
 
 	/**
+	 * The started
+	 * @var \DateTime
+	 */
+	protected $started;
+
+	/**
 	 * The moved
 	 * @var \DateTime
 	 */
@@ -50,6 +56,8 @@ class Ticket {
 
 	public function __construct(){
 		$this->created = new \DateTime();
+		$this->moved = new \DateTime();
+		$this->started = new \DateTime();
 	}
 
 	/**
@@ -130,6 +138,22 @@ class Ticket {
 	public function getMoved()
 	{
 		return $this->moved;
+	}
+
+	/**
+	 * @param \DateTime $started
+	 */
+	public function setStarted($started)
+	{
+		$this->started = $started;
+	}
+
+	/**
+	 * @return \DateTime
+	 */
+	public function getStarted()
+	{
+		return $this->started;
 	}
 }
 ?>

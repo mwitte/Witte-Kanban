@@ -1,0 +1,20 @@
+<div class="span{superiorColumn.columnWith -> f:format.number(decimals: 0)}">
+	<div class="row-fluid">
+		<h4>{superiorColumn.title}</h4>
+		<f:if condition="{superiorColumn.limitValue} != 0">
+			{superiorColumn.limitValue}
+		</f:if>
+	</div>
+	<div class="row-fluid">
+		<f:if condition="{superiorColumn.subColumns -> f:count()} > 1">
+			<f:then>
+				<f:for each="superiorColumn.subColumns" as="subColumn">
+					<f:render partial="BoardGrid/SubColumn" arguments="{subColumn: subColumn}"/>
+				</f:for>
+			</f:then>
+			<f:else>
+				<f:render partial="BoardGrid/SubColumn" arguments="{subColumn: superiorColumn.firstSubColumn}"/>
+			</f:else>
+		</f:if>
+	</div>
+</div>

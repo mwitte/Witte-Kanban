@@ -1,0 +1,12 @@
+-
+  name: 'Witte Kanban Application'
+  uriPattern: 'witte.kanban'
+  defaults:
+    '@package':    'Witte.Kanban'
+    '@controller': 'Base'
+    '@action':     'index'
+-
+  name: 'Witte Kanban Application'
+  uriPattern: 'Witte.Kanban/{@controller}/{@action}'
+  defaults:
+    '@package':    'Witte.Kanban'

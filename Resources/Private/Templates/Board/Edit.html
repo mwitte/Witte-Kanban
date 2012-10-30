@@ -1,23 +1,35 @@
-<f:layout name="Default" />
-
-<f:section name="Title">Edit board "{board.name}"</f:section>
+{namespace t=TYPO3\TYPO3\ViewHelpers}
+<f:layout name="Frontend" />
 
 <f:section name="Content">
-	<f:form action="update" object="{board}" name="board">
-		<ol>
-			<li>
-				<label for="title">Title</label>
-				<f:form.textfield property="title" id="title" />
-			</li>
-		
-			<li>
-				<label for="columns">Columns</label>
-				<f:form.textfield property="columns" id="columns" />
-			</li>
-		
-			<li>
-				<f:form.submit value="Update"/>
-			</li>
-		</ol>
-	</f:form>
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="row-fluid">
+				<f:for each="{board.superiorColumns}" as="superiorColumn" iteration="iterator">
+					<f:render partial="BoardGrid/EditSuperiorColumn" arguments="{superiorColumn: superiorColumn, board: board, iterator: iterator}"/>
+				</f:for>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row-fluid">
+		<f:form action="update" object="{board}" name="board">
+			<ol>
+				<li>
+					<label for="title">Title</label>
+					<f:form.textfield property="title" id="title" />
+				</li>
+
+				<li>
+					<label for="columns">Columns</label>
+					<f:form.textfield property="columns" id="columns" />
+				</li>
+
+				<li>
+					<f:form.submit value="Update"/>
+				</li>
+			</ol>
+		</f:form>
+	</div>
 </f:section>

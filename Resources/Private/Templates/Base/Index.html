@@ -1,0 +1,42 @@
+{namespace t=TYPO3\TYPO3\ViewHelpers}
+<f:layout name="Frontend" />
+
+<f:section name="Content">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="page-header">
+				<h3>Boards Overview</h3>
+			</div>
+			<p>
+				Some statistics or something, we'll see.
+			</p>
+			<div class="well well-large">
+				<legend>Get started!</legend>
+				<a class="btn btn-primary" data-toggle="modal" href="#createBoard">Create a new Kanban board</a>
+			</div>
+			<div class="well well-large">
+				<legend>Get information about this project</legend>
+				<a class="btn btn-primary" data-toggle="modal" href="#projectPlanning">Project planning</a>
+			</div>
+
+
+		</div>
+	</div>
+
+	<f:render partial="Board/NewDialog"/>
+
+	<div id="projectPlanning" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="projectPlanningLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3 id="projectPlanningLabel">Project planning</h3>
+		</div>
+		<f:form action="create" arguments="{board: board}" controller="Ticket" name="newTicket" class="form-horizontal">
+			<div class="modal-body">
+				<f:render partial="Project"/>
+			</div>
+			<div class="modal-footer">
+				<button class="btn" data-dismiss="modal">Close</button>
+			</div>
+		</f:form>
+	</div>
+</f:section>

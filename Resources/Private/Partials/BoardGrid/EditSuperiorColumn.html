@@ -1,0 +1,56 @@
+<div class="span{superiorColumn.columnWith -> f:format.number(decimals: 0)}">
+	<div class="span10">
+	<div class="row-fluid">
+		<h4>{superiorColumn.title}</h4>
+		<f:if condition="{superiorColumn.limitValue} != 0">
+			{superiorColumn.limitValue}
+		</f:if>
+		<f:if condition="{superiorColumn.isFirst} != {superiorColumn.isLast}">
+			<f:else>
+				<div class="btn-group">
+					<a class="btn dropdown-toggle btn-danger" data-toggle="dropdown" rel="tooltip" data-placement="top" data-original-title="Deletes all sub-columns, tickets are pulled to the next column left-sided" href="#">
+						Delete
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<f:link.action controller="SuperiorColumn" action="delete" arguments="{superiorColumn: superiorColumn, board: board}">
+								Confirm
+							</f:link.action>
+						</li>
+					</ul>
+				</div>
+			</f:else>
+		</f:if>
+
+	</div>
+	</div>
+	<div class="span2">
+		<f:if condition="{superiorColumn.isLast} != 1">
+
+			<a data-toggle="modal" data-target="#newSuperiorColumn{superiorColumn.sort}" role="button" rel="tooltip" data-placement="bottom" data-original-title="Creates a new column" class="btn">+</a>
+
+			<div id="newSuperiorColumn{superiorColumn.sort}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newSuperiorColumn{superiorColumn.sort}Label" aria-hidden="true">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h3 id="newSuperiorColumn{superiorColumn.sort}Label">Create a new column</h3>
+				</div>
+				<f:form action="create" arguments="{board: board}" controller="SuperiorColumn" name="newSuperiorColumn" class="form-horizontal">
+					<f:form.hidden property="sort" id="sort" value="{iterator.cycle}"/>
+					<div class="modal-body">
+						<div class="control-group">
+							<label class="control-label" for="title">Title</label>
+							<div class="controls">
+								<f:form.textfield property="title" id="title" />
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn" data-dismiss="modal">Close</button>
+						<f:form.submit value="Create" class="btn btn-primary" />
+					</div>
+				</f:form>
+			</div>
+		</f:if>
+	</div>
+</div>

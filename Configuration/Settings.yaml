@@ -1,14 +1,3 @@
-TYPO3:
-  TYPO3:
-    modules:
-      management:
-        submodules:
-          wittekanban:
-            label: 'Witte Kanban'
-            controller: '\Witte\Kanban\Controller\Backend\BoardController'
-            description: "With this awesome virtual Kanban module you are able to plan your incredible projects. It explodes the limits of your imagination!!!111eleven"
-            icon: 'resource://Witte.Kanban/Public/Images/backendmodule_icon-24.png'
-
 Witte:
   Kanban:
     TwitterBootstrap:

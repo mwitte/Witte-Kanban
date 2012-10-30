@@ -1,5 +1,5 @@
 <?php
-namespace Witte\Kanban\Domain\Service;
+namespace Witte\Kanban\Controller;
 
 /*                                                                        *
  * This script belongs to the TYPO3 Flow package "Witte.Kanban".          *
@@ -7,14 +7,17 @@ namespace Witte\Kanban\Domain\Service;
  *                                                                        */
 
 use TYPO3\Flow\Annotations as Flow;
-use Doctrine\ORM\Mapping as ORM;
+
+use TYPO3\Flow\Mvc\Controller\ActionController;
+use \Witte\Kanban\Domain\Model\Board;
+use \Witte\Kanban\Domain\Model\SuperiorColumn;
 
 /**
- * Service
+ * Base controller for the Witte.Kanban package
  *
  * @Flow\Scope("singleton")
  */
-abstract class AbstractService {
+abstract class AbstractController extends ActionController {
 
 	/**
 	 * @Flow\Inject
@@ -41,6 +44,30 @@ abstract class AbstractService {
 	protected $ticketRepository;
 
 	/**
+	 * @Flow\Inject
+	 * @var \Witte\Kanban\Domain\Service\BoardService
+	 */
+	protected $boardService;
+
+	/**
+	 * @Flow\Inject
+	 * @var \Witte\Kanban\Domain\Service\SuperiorColumnService
+	 */
+	protected $superiorColumnService;
+
+	/**
+	 * @Flow\Inject
+	 * @var \Witte\Kanban\Domain\Service\SubColumnService
+	 */
+	protected $subColumnService;
+
+	/**
+	 * @Flow\Inject
+	 * @var \Witte\Kanban\Domain\Service\TicketService
+	 */
+	protected $ticketService;
+
+	/**
 	 * @var array
 	 */
 	protected $settings;
@@ -55,12 +82,9 @@ abstract class AbstractService {
 		$this->settings = $settings;
 	}
 
-	/**
-	 * @param $count
-	 * @return float
-	 */
-	protected function getQuotient($count){
-		return floor($this->settings['TwitterBootstrap']['Columns'] / $count);
+	protected function addNeededObjectsToView(){
+		$this->view->assign('boards', $this->boardRepository->findAll());
 	}
 }
+
 ?>
