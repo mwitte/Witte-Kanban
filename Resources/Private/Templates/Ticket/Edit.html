@@ -1,0 +1,50 @@
+{namespace t=TYPO3\TYPO3\ViewHelpers}
+<f:layout name="Frontend" />
+
+<f:section name="Content">
+	<div class="row-fluid">
+		<div class="span12">
+			<f:form action="update" controller="Ticket" object="{ticket}" name="ticket" class="form-horizontal">
+				<legend>Edit ticket for {ticket.subColumn.superiorColumn.board.title}</legend>
+				<div class="control-group">
+					<label class="control-label" for="title">Title</label>
+					<div class="controls">
+						<f:form.textfield property="title" id="title" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="description">Description</label>
+					<div class="controls">
+						<f:form.textarea class="input-xlarge" rows="6" property="description" id="description" />
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<f:link.action class="btn" action="show" controller="Board" arguments="{board: board}">
+							Back
+						</f:link.action>
+						<f:form.submit value="Save" class="btn btn-success" />
+
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<div class="btn-group">
+							<a class="btn dropdown-toggle btn-danger" data-toggle="dropdown" rel="tooltip" data-placement="top" data-original-title="Deletes this ticket" href="#">
+								Delete
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<f:link.action controller="Ticket" action="delete" arguments="{ticket: ticket}">
+										Confirm
+									</f:link.action>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</f:form>
+		</div>
+	</div>
+</f:section>

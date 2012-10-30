@@ -29,8 +29,24 @@ class TicketController extends AbstractController {
 	}
 
 	public function showAction(Ticket $ticket){
-		\TYPO3\Flow\var_dump($ticket);
 		$this->view->assign('ticket', $ticket);
+		$this->view->assign('board', $ticket->getSubColumn()->getSuperiorColumn()->getBoard());
+	}
+
+	public function editAction(Ticket $ticket){
+		$this->view->assign('ticket', $ticket);
+		$this->view->assign('board', $ticket->getSubColumn()->getSuperiorColumn()->getBoard());
+	}
+
+	public function updateAction(Ticket $ticket){
+		$this->ticketRepository->update($ticket);
+		$this->redirect('show', 'Board', NULL, array('board' => $ticket->getSubColumn()->getSuperiorColumn()->getBoard()));
+	}
+
+	public function deleteAction(Ticket $ticket){
+		$ticket->getSubColumn()->removeTicket($ticket);
+		$this->ticketRepository->remove($ticket);
+		$this->redirect('show', 'Board', NULL, array('board' => $ticket->getSubColumn()->getSuperiorColumn()->getBoard()));
 	}
 
 	public function moveToNextSubColumnAction(Ticket $ticket){
