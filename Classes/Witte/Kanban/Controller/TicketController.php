@@ -59,6 +59,15 @@ class TicketController extends AbstractController {
 		$this->redirect('show', 'Board', NULL, array('board' => $ticket->getSubColumn()->getSuperiorColumn()->getBoard()));
 	}
 
+	public function archivingAction(Ticket $ticket){
+		$this->ticketService->archiveTicket($ticket);
+		$this->redirect('show', 'Board', NULL, array('board' => $ticket->getBoard()));
+	}
+
+	public function archiveAction(Board $board){
+		$this->view->assign('board', $board);
+	}
+
 	/**
 	 * @param \Witte\Kanban\Domain\Model\Board $board
 	 * @param \Witte\Kanban\Domain\Model\Ticket $newTicket

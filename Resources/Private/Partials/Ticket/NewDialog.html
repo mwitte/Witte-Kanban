@@ -10,7 +10,7 @@
 			<div class="control-group">
 				<label class="control-label" for="title">Title</label>
 				<div class="controls">
-					<f:form.textfield property="title" id="title" />
+					<f:form.textfield property="title" id="title"/>
 				</div>
 			</div>
 			<div class="control-group">
@@ -19,7 +19,12 @@
 					<f:form.textarea class="input-xlarge" rows="6" property="description" id="description" />
 				</div>
 			</div>
-
+			<div class="control-group">
+				<label class="control-label" for="version">Version</label>
+				<div class="controls">
+					<f:form.textfield property="version" id="version" additionalAttributes="{placeholder: 'optional'}"/>
+				</div>
+			</div>
 		</div>
 		<div class="modal-footer">
 			<button class="btn" data-dismiss="modal">Close</button>

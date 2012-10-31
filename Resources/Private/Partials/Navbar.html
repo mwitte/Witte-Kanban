@@ -62,12 +62,21 @@
 				<ul class="nav pull-right">
 					<f:if condition="{board}">
 						<li>
-							<f:link.action action="edit" controller="Board" arguments="{board: board}">
-								Edit board
+							<f:link.action action="archive" controller="Ticket" arguments="{board: board}">
+								<i class="icon-folder-open icon-white"></i> Ticket archive
 							</f:link.action>
 						</li>
+						<li class="divider-vertical"></li>
 						<li>
-							<a data-toggle="modal" href="#createTicket">Create a Ticket</a>
+							<f:link.action action="edit" controller="Board" arguments="{board: board}">
+								<i class="icon-pencil icon-white"></i> Edit board
+							</f:link.action>
+						</li>
+						<li class="divider-vertical"></li>
+						<li>
+							<a data-toggle="modal" href="#createTicket">
+								<i class="icon-plus icon-white"></i> New Ticket
+							</a>
 						</li>
 					</f:if>
 				</ul>

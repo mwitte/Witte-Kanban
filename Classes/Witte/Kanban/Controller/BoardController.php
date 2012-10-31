@@ -78,7 +78,7 @@ class BoardController extends AbstractController {
 	public function updateAction(Board $board) {
 		$this->boardRepository->update($board);
 		$this->addFlashMessage('Updated the board.');
-		$this->redirect('index');
+		$this->redirect('show', 'Board', NULL, array('board' => $board));
 	}
 
 	/**
@@ -92,7 +92,6 @@ class BoardController extends AbstractController {
 		$this->addFlashMessage('Deleted a board.');
 		$this->redirect('index');
 	}
-
 }
 
 ?>

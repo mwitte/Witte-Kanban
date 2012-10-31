@@ -1,0 +1,54 @@
+{namespace t=TYPO3\TYPO3\ViewHelpers}
+<f:layout name="Frontend" />
+
+<f:section name="Content">
+	<div class="row-fluid">
+		<div class="span12">
+			<legend>Ticket archive for {board.title}
+			</legend>
+			<div class="row-fluid">
+				<div class="span6">
+					<label class="control-label">Title</label>
+				</div>
+				<div class="span2">
+					<label class="control-label">Done</label>
+				</div>
+				<div class="span3">
+					<label class="control-label">Actions</label>
+				</div>
+			</div>
+			<f:if condition="{board.ticketArchive}">
+				<f:then>
+					<f:for each="{board.ticketArchive}" as="ticket">
+						<div class="row-fluid">
+							<div class="span6">
+								<f:link.action class="btn btn-primary t3-button" controller="Ticket" action="show" arguments="{ticket: ticket}">
+									<i class="icon-info-sign icon-white"></i> Show
+								</f:link.action>
+								<f:link.action action="show" controller="Ticket" arguments="{ticket: ticket}">
+									<f:format.crop maxCharacters="50">
+										{ticket.title}
+									</f:format.crop>
+								</f:link.action>
+							</div>
+							<div class="span2">
+								<f:format.date format="d.m.Y - H:i">{ticket.moved}</f:format.date>
+							</div>
+							<div class="span3">
+								<f:link.action class="btn btn-warning t3-button" controller="Ticket" action="edit" arguments="{ticket: ticket}">
+									<i class="legend icon-pencil icon-white"></i> Edit
+								</f:link.action>
+								<f:link.action class="btn btn-danger t3-button" controller="Ticket" action="delete" arguments="{ticket: ticket}">
+									<i class="icon-trash icon-white"></i> Delete
+								</f:link.action>
+							</div>
+						</div>
+					</f:for>
+				</f:then>
+				<f:else>
+					<p>No tickets archived yet.</p>
+				</f:else>
+			</f:if>
+		</div>
+	</div>
+</f:section>

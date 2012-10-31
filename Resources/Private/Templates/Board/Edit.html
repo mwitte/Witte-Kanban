@@ -4,6 +4,7 @@
 <f:section name="Content">
 	<div class="row-fluid">
 		<div class="span12">
+			<legend>Edit the board columns</legend>
 			<div class="row-fluid">
 				<f:for each="{board.superiorColumns}" as="superiorColumn" iteration="iterator">
 					<f:render partial="BoardGrid/EditSuperiorColumn" arguments="{superiorColumn: superiorColumn, board: board, iterator: iterator}"/>
@@ -14,22 +15,22 @@
 
 
 	<div class="row-fluid">
-		<f:form action="update" object="{board}" name="board">
-			<ol>
-				<li>
-					<label for="title">Title</label>
+		<f:form action="update" controller="Board" object="{board}" name="board" class="form-horizontal">
+			<legend>Edit the board properties</legend>
+			<div class="control-group">
+				<label class="control-label" for="title">Title</label>
+				<div class="controls">
 					<f:form.textfield property="title" id="title" />
-				</li>
-
-				<li>
-					<label for="columns">Columns</label>
-					<f:form.textfield property="columns" id="columns" />
-				</li>
-
-				<li>
-					<f:form.submit value="Update"/>
-				</li>
-			</ol>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<f:link.action class="btn" action="show" controller="Board" arguments="{board: board}">
+						Back
+					</f:link.action>
+					<f:form.submit value="Save" class="btn btn-success" />
+				</div>
+			</div>
 		</f:form>
 	</div>
 </f:section>

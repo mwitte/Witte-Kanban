@@ -33,6 +33,15 @@ class Board {
 	protected $superiorColumns;
 
 	/**
+	 * The archived tickets contained in this board
+	 *
+	 * @var \Doctrine\Common\Collections\Collection<\Witte\Kanban\Domain\Model\Ticket>
+	 * @ORM\OneToMany(mappedBy="board", cascade={"remove", "persist"})
+	 * @ORM\OrderBy({"moved" = "DESC"})
+	 */
+	protected $ticketArchive;
+
+	/**
 	 * The created
 	 * @var \DateTime
 	 */
@@ -110,6 +119,30 @@ class Board {
 	public function getCreated()
 	{
 		return $this->created;
+	}
+
+	/**
+	 * @param \Doctrine\Common\Collections\Collection $ticketArchive
+	 */
+	public function setTicketArchive($ticketArchive)
+	{
+		$this->ticketArchive = $ticketArchive;
+	}
+
+	/**
+	 * @return \Doctrine\Common\Collections\Collection
+	 */
+	public function getTicketArchive()
+	{
+		return $this->ticketArchive;
+	}
+
+	public function addToTicketArchive(Ticket $ticket){
+		$this->ticketArchive->add($ticket);
+	}
+
+	public function removeFromTicketArchive(Ticket $ticket){
+		$this->ticketArchive->removeElement($ticket);
 	}
 
 }

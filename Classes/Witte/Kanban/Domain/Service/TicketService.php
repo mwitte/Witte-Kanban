@@ -75,5 +75,20 @@ class TicketService extends AbstractService {
 		$subColumn = $board->getSuperiorColumns()->first()->getSubColumns()->first();
 		$this->createTicketInSubColumn($ticket, $subColumn);
 	}
+
+	public function archiveTicket(Ticket $ticket){
+		$board = $ticket->getSubColumn()->getSuperiorColumn()->getBoard();
+		$board->addToTicketArchive($ticket);
+
+		$subColumn = $ticket->getSubColumn();
+		$subColumn->removeTicket($ticket);
+
+		$ticket->setSubColumn(null);
+		$ticket->setBoard($board);
+
+		$this->boardRepository->update($board);
+		$this->subColumnRepository->update($subColumn);
+		$this->ticketRepository->update($ticket);
+	}
 }
 ?>

@@ -31,6 +31,12 @@ class Ticket {
 	protected $description;
 
 	/**
+	 * The version
+	 * @var string
+	 */
+	protected $version;
+
+	/**
 	 * The created
 	 * @var \DateTime
 	 */
@@ -53,6 +59,12 @@ class Ticket {
 	 * @ORM\ManyToOne(inversedBy="tickets")
 	 */
 	protected $subColumn;
+
+	/**
+	 * @var \Witte\Kanban\Domain\Model\Board
+	 * @ORM\ManyToOne(inversedBy="ticketArchive")
+	 */
+	protected $board;
 
 	public function __construct(){
 		$this->created = new \DateTime();
@@ -154,6 +166,38 @@ class Ticket {
 	public function getStarted()
 	{
 		return $this->started;
+	}
+
+	/**
+	 * @param string $version
+	 */
+	public function setVersion($version)
+	{
+		$this->version = $version;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getVersion()
+	{
+		return $this->version;
+	}
+
+	/**
+	 * @param \Witte\Kanban\Domain\Model\Board $board
+	 */
+	public function setBoard($board)
+	{
+		$this->board = $board;
+	}
+
+	/**
+	 * @return \Witte\Kanban\Domain\Model\Board
+	 */
+	public function getBoard()
+	{
+		return $this->board;
 	}
 }
 ?>

@@ -1,43 +1,63 @@
-<div class="well well-small">
+<div class="well well-small ticket-box">
 	<h6>
 		<f:link.action action="show" controller="Ticket" arguments="{ticket: ticket}">
-			{ticket.title}
+			<i class="icon-eye-open"></i> {ticket.title}
 		</f:link.action>
-		<f:link.action class="pull-right" action="edit" controller="Ticket" arguments="{ticket: ticket}">
+		<f:link.action class="btn btn-mini pull-right" action="edit" controller="Ticket" arguments="{ticket: ticket}">
 			<i class="icon-pencil"></i>
 		</f:link.action>
 	</h6>
 	<div class="row-fluid">
 
-		<f:if condition="{subColumn.isFirst} == 1">
-			<small class="pull-right">created: <f:format.date>{ticket.created}</f:format.date></small>
-		</f:if>
-		<f:if condition="{subColumn.isFirst} != {subColumn.isLast}">
-			<f:else>
-				<small class="pull-right">started: <f:format.date>{ticket.started}</f:format.date></small>
-			</f:else>
-		</f:if>
-		<f:if condition="{subColumn.isLast} == 1">
-			<div class="row-fluid">
-			<small class="pull-right">created: <f:format.date>{ticket.created}</f:format.date></small><br/>
-			<small class="pull-right">started: <f:format.date>{ticket.started}</f:format.date></small><br/>
-			<small class="pull-right">finished: <f:format.date>{ticket.moved}</f:format.date></small>
-			</div>
-		</f:if>
+
 
 	</div>
-	<p>
-		<f:format.nl2br>{ticket.description}</f:format.nl2br>
-	</p>
 	<f:if condition="{subColumn.isFirst} != 1">
-		<f:link.action class="btn" action="moveToPreviousSubColumn" controller="Ticket" arguments="{ticket: ticket}">
-			«
+		<f:link.action class="btn btn-small" action="moveToPreviousSubColumn" controller="Ticket" arguments="{ticket: ticket}">
+			<i class="icon-arrow-left"></i>
 		</f:link.action>
 	</f:if>
 	<f:if condition="{subColumn.isLast} != 1">
-		<f:link.action class="btn pull-right" action="moveToNextSubColumn" controller="Ticket" arguments="{ticket: ticket}">
-			»
+		<f:link.action class="btn btn-small pull-right" action="moveToNextSubColumn" controller="Ticket" arguments="{ticket: ticket}">
+			<i class="icon-arrow-right"></i>
 		</f:link.action>
 	</f:if>
+	<div class="row-fluid ticket-box-description">
+		<p>
+			<f:format.nl2br>{ticket.description}</f:format.nl2br>
+		</p>
+		<div class="row-fluid">
+			<dl class="dl-horizontal">
+
+				<f:if condition="{subColumn.isFirst} == 1">
+					<dt>created:</dt>
+					<dd><f:format.date>{ticket.created}</f:format.date></dd>
+				</f:if>
+				<f:if condition="{subColumn.isFirst} != {subColumn.isLast}">
+					<f:else>
+						<dt>started: </dt>
+						<dd><f:format.date>{ticket.started}</f:format.date></dd>
+					</f:else>
+				</f:if>
+				<f:if condition="{subColumn.isLast} == 1">
+					<dt>created:</dt>
+					<dd><f:format.date>{ticket.created}</f:format.date></dd>
+					<dt>started: </dt>
+					<dd><f:format.date>{ticket.started}</f:format.date></dd>
+					<dt>finished: </dt>
+					<dd><f:format.date>{ticket.moved}</f:format.date></dd>
+				</f:if>
+				<f:if condition="{ticket.version}">
+					<dt>version: </dt>
+					<dd>{ticket.version}</dd>
+				</f:if>
+			</dl>
+			<f:if condition="{subColumn.isLast} == 1">
+			<f:link.action class="btn btn-small btn-inverse pull-right" action="archiving" controller="Ticket" arguments="{ticket: ticket}">
+				<i class="icon-folder-open icon-white"></i> Archive
+			</f:link.action>
+			</f:if>
+		</div>
+	</div>
 	<div class="clearfix"></div>
 </div>

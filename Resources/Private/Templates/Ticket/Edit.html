@@ -19,12 +19,17 @@
 					</div>
 				</div>
 				<div class="control-group">
+					<label class="control-label" for="version">Version</label>
+					<div class="controls">
+						<f:form.textfield property="version" id="version" additionalAttributes="{placeholder: 'optional'}"/>
+					</div>
+				</div>
+				<div class="control-group">
 					<div class="controls">
 						<f:link.action class="btn" action="show" controller="Board" arguments="{board: board}">
 							Back
 						</f:link.action>
 						<f:form.submit value="Save" class="btn btn-success" />
-
 					</div>
 				</div>
 				<div class="control-group">

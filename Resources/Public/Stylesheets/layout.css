@@ -15,3 +15,17 @@ a.brand{
 a.brand:hover{
     color: #FFF !important;
 }
+
+div.ticket-box:hover div.ticket-box-description{
+    max-height: 600px;
+    overflow: auto;
+}
+
+div.ticket-box-description{
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.5s;
+    -moz-transition: max-height 0.5s; /* Firefox 4 */
+    -webkit-transition: max-height 0.5s; /* Safari and Chrome */
+    -o-transition: max-height 0.5s; /* Opera */
+}
