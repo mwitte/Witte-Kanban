@@ -1,69 +1,30 @@
 
-	<legend>Project progress</legend>
-	<h5>Progress until v0.1</h5>
-	<div class="progress progress-striped active">
-		<div class="bar" style="width: 66%;"></div>
-	</div>
-	<h5>Progress until v0.3(stable usable)</h5>
-	<div class="progress progress-striped active">
-		<div class="bar" style="width: 50%;"></div>
-	</div>
-	<legend>Todo v0.1 (basic functionality)</legend>
-	<ul>
-		<li>
-			Administration workflow
-			<ul>
-				<li>Editing SuperiorColumns</li>
-				<li>Adding SubColumns</li>
-				<li>Editing SubColumns</li>
-				<li>Deleting SubColumns</li>
-			</ul>
-		</li>
-		<li>
-			Productive workflow
-			<ul>
-				<li>Edit Tickets</li>
-				<li>Delete Tickets</li>
-			</ul>
-		</li>
-	</ul>
-	<legend>Todo v0.2 (usable):</legend>
-	<ul>
-		<li>Refactoring Controllers</li>
-		<li>Refactoring Templates</li>
-		<li>Refactoring redirects</li>
-	</ul>
-	<legend>Todo v0.3 (quality):</legend>
-	<ul>
-		<li>Unit tests for models</li>
-		<li>Unit/Functional tests for services</li>
-		<li>Documentation</li>
-	</ul>
-	<legend>Done:</legend>
-	<ul>
-		<li>Create new Application</li>
-		<li>Create data structure(Board, SuperiorColumn, SubColumn, Ticket)</li>
-		<li>Remove logic from models and controllers to dedicated services</li>
-		<li>Remove Neos backend module, refactor to stand-alone application</li>
-		<li>Create basic routes</li>
-		<li>Basic Layout</li>
-		<li>TwitterBootstrap integration</li>
-		<li>
-			Productive workflow
-			<ul>
-				<li>Create Board</li>
-				<li>Create Tickets</li>
-				<li>Switch the Ticket's Column</li>
-			</ul>
-		</li>
-		<li>
-			Administration workflow
-			<ul>
-				<li>Adding SuperiorColumns</li>
-				<li>Deleting SuperiorColumns</li>
-			</ul>
-		</li>
-	</ul>
-	<p>
-		<small>This list exists because W:Kanban is not ready yet ;)</small>
-	</p>
+<legend>Why?</legend>
+<p>This project stated from a personal idea to learn something about TYPO3 Flow.</p>
+
+<legend>Changelog</legend>
+<h4>v0.1</h4>
+	<p>2012-10-31</p>
+<ul>
+	<li>Dedicated Flow Application</li>
+	<li>Basic data structure(Board, SuperiorColumn, SubColumn, Ticket)</li>
+	<li>Controllers for each Model for basic CRUD operations</li>
+	<li>Services for the Models which contain further logic(business logic)</li>
+	<li>Twitter Bootstrap integration</li>
+	<li>Templates for business logic</li>
+	<li>Basic Routing settings</li>
+</ul>
+
+<legend>Licence</legend>
+<p style="text-align: center;">
+	<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+		<img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" />
+	</a><br />
+	<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Witte.Kanban</span> by
+	<a xmlns:cc="http://creativecommons.org/ns#" href="http://www.matthias-witte.net" property="cc:attributionName" rel="cc:attributionURL">
+		Matthias Witte
+	</a> is licensed under a
+	<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+		Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+	</a>.
+</p>
