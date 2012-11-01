@@ -12,13 +12,13 @@
 
 
 	</div>
-	<f:if condition="{subColumn.isFirst} != 1">
-		<f:link.action class="btn btn-small" action="moveToPreviousSubColumn" controller="Ticket" arguments="{ticket: ticket}">
+	<f:if condition="{ticket.column.isFirst} != 1">
+		<f:link.action class="btn btn-small" action="moveToPreviousColumn" controller="Ticket" arguments="{ticket: ticket}">
 			<i class="icon-arrow-left"></i>
 		</f:link.action>
 	</f:if>
-	<f:if condition="{subColumn.isLast} != 1">
-		<f:link.action class="btn btn-small pull-right" action="moveToNextSubColumn" controller="Ticket" arguments="{ticket: ticket}">
+	<f:if condition="{ticket.column.isLast} != 1">
+		<f:link.action class="btn btn-small pull-right" action="moveToNextColumn" controller="Ticket" arguments="{ticket: ticket}">
 			<i class="icon-arrow-right"></i>
 		</f:link.action>
 	</f:if>
@@ -29,17 +29,17 @@
 		<div class="row-fluid">
 			<dl class="dl-horizontal">
 
-				<f:if condition="{subColumn.isFirst} == 1">
+				<f:if condition="{ticket.column.isFirst} == 1">
 					<dt>created:</dt>
 					<dd><f:format.date>{ticket.created}</f:format.date></dd>
 				</f:if>
-				<f:if condition="{subColumn.isFirst} != {subColumn.isLast}">
+				<f:if condition="{ticket.column.isFirst} != {ticket.column.isLast}">
 					<f:else>
 						<dt>started: </dt>
 						<dd><f:format.date>{ticket.started}</f:format.date></dd>
 					</f:else>
 				</f:if>
-				<f:if condition="{subColumn.isLast} == 1">
+				<f:if condition="{ticket.column.isLast} == 1">
 					<dt>created:</dt>
 					<dd><f:format.date>{ticket.created}</f:format.date></dd>
 					<dt>started: </dt>
@@ -52,7 +52,7 @@
 					<dd>{ticket.version}</dd>
 				</f:if>
 			</dl>
-			<f:if condition="{subColumn.isLast} == 1">
+			<f:if condition="{ticket.column.isLast} == 1">
 			<f:link.action class="btn btn-small btn-inverse pull-right" action="archiving" controller="Ticket" arguments="{ticket: ticket}">
 				<i class="icon-folder-open icon-white"></i> Archive
 			</f:link.action>

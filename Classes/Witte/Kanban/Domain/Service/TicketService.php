@@ -10,7 +10,7 @@ use TYPO3\Flow\Annotations as Flow;
 use Doctrine\ORM\Mapping as ORM;
 use \Witte\Kanban\Domain\Model\Board;
 use \Witte\Kanban\Domain\Model\Ticket;
-use \Witte\Kanban\Domain\Model\SubColumn;
+use \Witte\Kanban\Domain\Model\Column;
 use \Witte\Kanban\Domain\Service\AbstractService;
 
 /**
@@ -22,72 +22,135 @@ class TicketService extends AbstractService {
 
 	/**
 	 * @Flow\Inject
-	 * @var \Witte\Kanban\Domain\Service\SubColumnService
+	 * @var \Witte\Kanban\Domain\Service\ColumnService
 	 */
-	protected $subColumnService;
+	protected $columnService;
 
-	public function moveTicketToNextSubColumn(Ticket $ticket){
-		$nextSubColumn = $this->subColumnService->getNextSubColumn($ticket->getSubColumn());
-		if($nextSubColumn){
-			$this->moveTicketToSubColumn($ticket, $nextSubColumn);
+	/**
+	 * @Flow\Inject
+	 * @var \Witte\Kanban\Domain\Service\BoardService
+	 */
+	protected $boardService;
+
+	/**
+	 * Move a ticket to the next column
+	 *
+	 * @param Ticket $ticket
+	 * @return bool
+	 */
+	public function moveTicketToNextColumn(Ticket $ticket){
+		$nextColumn = $this->columnService->getNextColumn($ticket->getColumn());
+		if($nextColumn){
+			$this->moveTicketToColumn($ticket, $nextColumn);
+			return true;
+		}else{
+			return false;
 		}
 	}
 
-	public function moveTicketToPreviousSubColumn(Ticket $ticket){
-		$previousSubColumn = $this->subColumnService->getPreviousSubColumn($ticket->getSubColumn());
-		if($previousSubColumn){
-			$this->moveTicketToSubColumn($ticket, $previousSubColumn);
+	/**
+	 * Move a ticket to the previous column
+	 *
+	 * @param Ticket $ticket
+	 * @return bool
+	 */
+	public function moveTicketToPreviousColumn(Ticket $ticket){
+		$previousColumn = $this->columnService->getPreviousColumn($ticket->getColumn());
+		if($previousColumn){
+			$this->moveTicketToColumn($ticket, $previousColumn);
+			return true;
+		}else{
+			return false;
 		}
 	}
 
-	public function moveTicketToSubColumn(Ticket $ticket, SubColumn $subColumn){
+	/**
+	 * Move a ticket to to the parent column
+	 *
+	 * @param Ticket $ticket
+	 * @return bool
+	 */
+	public function moveTicketToParentColumn(Ticket $ticket){
+		if($ticket->getColumn()->getParentColumn()){
+			$this->moveTicketToColumn($ticket, $ticket->getColumn()->getParentColumn());
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	/**
+	 * Move a ticket to the given column
+	 *
+	 * @param Ticket $ticket
+	 * @param Column $column
+	 */
+	public function moveTicketToColumn(Ticket $ticket, Column $column){
 
 		// ticket is moving, so set current date for moved
 		$ticket->setMoved(new \DateTime());
 
 		// remove ticket from old column
-		$oldSubColumn = $ticket->getSubColumn();
-		$oldSubColumn->removeTicket($ticket);
-		$this->subColumnRepository->update($oldSubColumn);
+		$oldColumn = $ticket->getColumn();
+		$oldColumn->removeTicket($ticket);
+		$this->columnRepository->update($oldColumn);
 
+		$firstColumn = $this->boardService->getFirstLowestLevelColumn($this->boardService->getBoardByTicket($ticket));
 		// if old place was first column set the started date
-		if($oldSubColumn->getSuperiorColumn()->getIsFirst()){
+		if($oldColumn == $firstColumn){
 			$ticket->setStarted(new \DateTime());
 		}
 
+		$ticket->setColumn($column);
+		$column->addTicket($ticket);
 
-		$ticket->setSubColumn($subColumn);
-		$subColumn->addTicket($ticket);
-
-		$this->subColumnRepository->update($subColumn);
+		$this->columnRepository->update($column);
 		$this->ticketRepository->update($ticket);
 	}
 
-	public function createTicketInSubColumn(Ticket $ticket, SubColumn $subColumn){
-		$ticket->setSubColumn($subColumn);
-		$subColumn->addTicket($ticket);
+	/**
+	 * Creates a ticket in the given column
+	 *
+	 * @param Ticket $ticket
+	 * @param Column $column
+	 */
+	public function createTicketInColumn(Ticket $ticket, Column $column){
+		$ticket->setColumn($column);
+		$column->addTicket($ticket);
 
 		$this->ticketRepository->add($ticket);
-		$this->subColumnRepository->update($subColumn);
+		$this->columnRepository->update($column);
 	}
 
+	/**
+	 * Creates a ticket in the given board
+	 *
+	 * @param Ticket $ticket
+	 * @param Board $board
+	 */
 	public function createTicketInBoard(Ticket $ticket, Board $board){
-		$subColumn = $board->getSuperiorColumns()->first()->getSubColumns()->first();
-		$this->createTicketInSubColumn($ticket, $subColumn);
+		// get the first column of the board
+		$column = $this->boardService->getFirstLowestLevelColumn($board);
+		$this->createTicketInColumn($ticket, $column);
 	}
 
+	/**
+	 * Removes a ticket from the board and pushes it into the archive
+	 *
+	 * @param Ticket $ticket
+	 */
 	public function archiveTicket(Ticket $ticket){
-		$board = $ticket->getSubColumn()->getSuperiorColumn()->getBoard();
+		$board = $this->boardService->getBoardByTicket($ticket);
 		$board->addToTicketArchive($ticket);
 
-		$subColumn = $ticket->getSubColumn();
-		$subColumn->removeTicket($ticket);
+		$column = $ticket->getColumn();
+		$column->removeTicket($ticket);
 
-		$ticket->setSubColumn(null);
+		$ticket->setColumn(null);
 		$ticket->setBoard($board);
 
 		$this->boardRepository->update($board);
-		$this->subColumnRepository->update($subColumn);
+		$this->columnRepository->update($column);
 		$this->ticketRepository->update($ticket);
 	}
 }

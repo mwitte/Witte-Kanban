@@ -10,7 +10,6 @@ use TYPO3\Flow\Annotations as Flow;
 
 use TYPO3\Flow\Mvc\Controller\ActionController;
 use \Witte\Kanban\Domain\Model\Board;
-use \Witte\Kanban\Domain\Model\SuperiorColumn;
 use \Witte\Kanban\Domain\Model\Ticket;
 
 /**
@@ -19,6 +18,18 @@ use \Witte\Kanban\Domain\Model\Ticket;
  * @Flow\Scope("singleton")
  */
 class TicketController extends AbstractController {
+
+	/**
+	 * @Flow\Inject
+	 * @var \Witte\Kanban\Domain\Service\TicketService
+	 */
+	protected $ticketService;
+
+	/**
+	 * @Flow\Inject
+	 * @var \Witte\Kanban\Domain\Service\BoardService
+	 */
+	protected $boardService;
 
 	/**
 	 * @param \Witte\Kanban\Domain\Model\Board $board
@@ -30,33 +41,33 @@ class TicketController extends AbstractController {
 
 	public function showAction(Ticket $ticket){
 		$this->view->assign('ticket', $ticket);
-		$this->view->assign('board', $ticket->getSubColumn()->getSuperiorColumn()->getBoard());
+		$this->view->assign('board', $this->boardService->getBoardByTicket($ticket));
 	}
 
 	public function editAction(Ticket $ticket){
 		$this->view->assign('ticket', $ticket);
-		$this->view->assign('board', $ticket->getSubColumn()->getSuperiorColumn()->getBoard());
+		$this->view->assign('board', $this->boardService->getBoardByTicket($ticket));
 	}
 
 	public function updateAction(Ticket $ticket){
 		$this->ticketRepository->update($ticket);
-		$this->redirect('show', 'Board', NULL, array('board' => $ticket->getSubColumn()->getSuperiorColumn()->getBoard()));
+		$this->redirect('show', 'Board', NULL, array('board' => $this->boardService->getBoardByTicket($ticket)));
 	}
 
 	public function deleteAction(Ticket $ticket){
-		$ticket->getSubColumn()->removeTicket($ticket);
+		$ticket->getSlot()->removeTicket($ticket);
 		$this->ticketRepository->remove($ticket);
-		$this->redirect('show', 'Board', NULL, array('board' => $ticket->getSubColumn()->getSuperiorColumn()->getBoard()));
+		$this->redirect('show', 'Board', NULL, array('board' => $this->boardService->getBoardByTicket($ticket)));
 	}
 
-	public function moveToNextSubColumnAction(Ticket $ticket){
-		$this->ticketService->moveTicketToNextSubColumn($ticket);
-		$this->redirect('show', 'Board', NULL, array('board' => $ticket->getSubColumn()->getSuperiorColumn()->getBoard()));
+	public function moveToNextColumnAction(Ticket $ticket){
+		$this->ticketService->moveTicketToNextColumn($ticket);
+		$this->redirect('show', 'Board', NULL, array('board' => $this->boardService->getBoardByTicket($ticket)));
 	}
 
-	public function moveToPreviousSubColumnAction(Ticket $ticket){
-		$this->ticketService->moveTicketToPreviousSubColumn($ticket);
-		$this->redirect('show', 'Board', NULL, array('board' => $ticket->getSubColumn()->getSuperiorColumn()->getBoard()));
+	public function moveToPreviousColumnAction(Ticket $ticket){
+		$this->ticketService->moveTicketToPreviousColumn($ticket);
+		$this->redirect('show', 'Board', NULL, array('board' => $this->boardService->getBoardByTicket($ticket)));
 	}
 
 	public function archivingAction(Ticket $ticket){

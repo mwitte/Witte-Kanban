@@ -8,7 +8,6 @@ namespace Witte\Kanban\Domain\Model;
 
 use TYPO3\Flow\Annotations as Flow;
 use Doctrine\ORM\Mapping as ORM;
-use \Witte\Kanban\Domain\Model\SuperiorColumn;
 
 /**
  * A Board
@@ -24,13 +23,13 @@ class Board {
 	protected $title;
 
 	/**
-	 * The superiorColumns contained in this board
+	 * The Columns contained in this board
 	 *
-	 * @var \Doctrine\Common\Collections\Collection<\Witte\Kanban\Domain\Model\SuperiorColumn>
+	 * @var \Doctrine\Common\Collections\Collection<\Witte\Kanban\Domain\Model\Column>
 	 * @ORM\OneToMany(mappedBy="board", cascade={"remove", "persist"})
 	 * @ORM\OrderBy({"sort" = "ASC"})
 	 */
-	protected $superiorColumns;
+	protected $columns;
 
 	/**
 	 * The archived tickets contained in this board
@@ -49,7 +48,7 @@ class Board {
 
 
 	public function __construct(){
-		$this->superiorColumns = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->columns = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->created = new \DateTime();
 	}
 
@@ -73,36 +72,36 @@ class Board {
 	}
 
 	/**
-	 * Get the Board's superiorColumns
+	 * Get the Board's Columns
 	 *
-	 * @return \Doctrine\Common\Collections\Collection<\Witte\Kanban\Domain\Model\SuperiorColumn> The Board's superiorColumns
+	 * @return \Doctrine\Common\Collections\Collection<\Witte\Kanban\Domain\Model\Column> The Board's Columns
 	 */
-	public function getSuperiorColumns() {
-		return $this->superiorColumns;
+	public function getColumns() {
+		return $this->columns;
 	}
 
 	/**
-	 * Sets this Board's superiorColumns
+	 * Sets this Board's Columns
 	 *
-	 * @param \Doctrine\Common\Collections\Collection<\Witte\Kanban\Domain\Model\SuperiorColumn> $superiorColumns The Board's superiorColumns
+	 * @param \Doctrine\Common\Collections\Collection<\Witte\Kanban\Domain\Model\Column> $columns The Board's Columns
 	 * @return void
 	 */
-	public function setSuperiorColumns(SuperiorColumn $superiorColumns) {
-		$this->superiorColumns = $superiorColumns;
+	public function setColumns($columns) {
+		$this->columns = $columns;
 	}
 
 	/**
-	 * @param SuperiorColumn $superiorColumn
+	 * @param Column $column
 	 */
-	public function addSuperiorColumn(SuperiorColumn $superiorColumn){
-		$this->superiorColumns->add($superiorColumn);
+	public function addColumn(Column $column){
+		$this->columns->add($column);
 	}
 
 	/**
-	 * @param SuperiorColumn $superiorColumn
+	 * @param Column $column
 	 */
-	public function removeSuperiorColumn(SuperiorColumn $superiorColumn){
-		$this->superiorColumns->removeElement($superiorColumn);
+	public function removeColumn(Column $column){
+		$this->columns->removeElement($column);
 	}
 
 	/**

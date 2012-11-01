@@ -24,15 +24,9 @@ abstract class AbstractService {
 
 	/**
 	 * @Flow\Inject
-	 * @var \Witte\Kanban\Domain\Repository\SuperiorColumnRepository
+	 * @var \Witte\Kanban\Domain\Repository\ColumnRepository
 	 */
-	protected $superiorColumnRepository;
-
-	/**
-	 * @Flow\Inject
-	 * @var \Witte\Kanban\Domain\Repository\SubColumnRepository
-	 */
-	protected $subColumnRepository;
+	protected $columnRepository;
 
 	/**
 	 * @Flow\Inject

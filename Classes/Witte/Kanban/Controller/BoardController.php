@@ -56,7 +56,7 @@ class BoardController extends AbstractController {
 		$this->boardService->createBoardWithDependencies($newBoard);
 
 		$this->addFlashMessage('Created the new board ' . $newBoard->getTitle());
-		$this->redirect('index');
+		$this->redirect('show', 'Board', NULL, array('board' => $newBoard));
 	}
 
 	/**

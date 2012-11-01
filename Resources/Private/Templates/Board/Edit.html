@@ -6,8 +6,8 @@
 		<div class="span12">
 			<legend>Edit the board columns</legend>
 			<div class="row-fluid">
-				<f:for each="{board.superiorColumns}" as="superiorColumn" iteration="iterator">
-					<f:render partial="BoardGrid/EditSuperiorColumn" arguments="{superiorColumn: superiorColumn, board: board, iterator: iterator}"/>
+				<f:for each="{board.columns}" as="column" iteration="iterator">
+					<f:render partial="BoardGrid/EditColumn" arguments="{column: column, board: board, iterator: iterator}"/>
 				</f:for>
 			</div>
 		</div>

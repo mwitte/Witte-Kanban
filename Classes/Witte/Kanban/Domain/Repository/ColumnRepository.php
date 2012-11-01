@@ -9,11 +9,11 @@ namespace Witte\Kanban\Domain\Repository;
 use TYPO3\Flow\Annotations as Flow;
 
 /**
- * A repository for SubColumns
+ * A repository for Columns
  *
  * @Flow\Scope("singleton")
  */
-class SubColumnRepository extends \TYPO3\Flow\Persistence\Repository {
+class ColumnRepository extends \TYPO3\Flow\Persistence\Repository {
 
 	// add customized methods here
 

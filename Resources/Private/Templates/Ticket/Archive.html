@@ -34,13 +34,25 @@
 							<div class="span2">
 								<f:format.date format="d.m.Y - H:i">{ticket.moved}</f:format.date>
 							</div>
-							<div class="span3">
+							<div class="span2">
 								<f:link.action class="btn btn-warning t3-button" controller="Ticket" action="edit" arguments="{ticket: ticket}">
 									<i class="legend icon-pencil icon-white"></i> Edit
 								</f:link.action>
-								<f:link.action class="btn btn-danger t3-button" controller="Ticket" action="delete" arguments="{ticket: ticket}">
-									<i class="icon-trash icon-white"></i> Delete
-								</f:link.action>
+							</div>
+							<div class="span2">
+								<div class="btn-group">
+									<a class="btn dropdown-toggle btn-danger" data-toggle="dropdown" rel="tooltip" data-placement="top" data-original-title="Deletes this ticket completely!" href="#">
+										<i class="icon-trash icon-white"></i> Delete
+										<span class="caret"></span>
+									</a>
+									<ul class="dropdown-menu">
+										<li>
+											<f:link.action controller="Ticket" action="delete" arguments="{ticket: ticket}">
+												Confirm
+											</f:link.action>
+										</li>
+									</ul>
+								</div>
 							</div>
 						</div>
 					</f:for>

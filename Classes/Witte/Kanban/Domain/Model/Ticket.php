@@ -8,10 +8,9 @@ namespace Witte\Kanban\Domain\Model;
 
 use TYPO3\Flow\Annotations as Flow;
 use Doctrine\ORM\Mapping as ORM;
-use \Witte\Kanban\Domain\Model\SubColumn;
 
 /**
- * A Column
+ * A Ticket
  *
  * @Flow\Entity
  */
@@ -55,10 +54,10 @@ class Ticket {
 	protected $moved;
 
 	/**
-	 * @var \Witte\Kanban\Domain\Model\SubColumn
+	 * @var \Witte\Kanban\Domain\Model\Column
 	 * @ORM\ManyToOne(inversedBy="tickets")
 	 */
-	protected $subColumn;
+	protected $slot;
 
 	/**
 	 * @var \Witte\Kanban\Domain\Model\Board
@@ -70,6 +69,7 @@ class Ticket {
 		$this->created = new \DateTime();
 		$this->moved = new \DateTime();
 		$this->started = new \DateTime();
+		$this->version = '';
 	}
 
 	/**
@@ -102,22 +102,6 @@ class Ticket {
 	public function getDescription()
 	{
 		return $this->description;
-	}
-
-	/**
-	 * @param SubColumn $subColumn
-	 */
-	public function setSubColumn($subColumn)
-	{
-		$this->subColumn = $subColumn;
-	}
-
-	/**
-	 * @return SubColumn
-	 */
-	public function getSubColumn()
-	{
-		return $this->subColumn;
 	}
 
 	/**
@@ -198,6 +182,30 @@ class Ticket {
 	public function getBoard()
 	{
 		return $this->board;
+	}
+
+	/**
+	 * @param \Witte\Kanban\Domain\Model\Column $column
+	 */
+	public function setSlot($slot)
+	{
+		$this->slot = $slot;
+	}
+
+	/**
+	 * @return \Witte\Kanban\Domain\Model\Column
+	 */
+	public function getSlot()
+	{
+		return $this->slot;
+	}
+
+	public function getColumn(){
+		return $this->slot;
+	}
+
+	public function setColumn($column){
+		$this->slot = $column;
 	}
 }
 ?>

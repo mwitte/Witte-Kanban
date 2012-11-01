@@ -1,11 +1,11 @@
-<div class="span{superiorColumn.columnWith -> f:format.number(decimals: 0)}">
+<div class="span{column.columnWith -> f:format.number(decimals: 0)}">
 	<div class="span10">
 	<div class="row-fluid">
-		<h4>{superiorColumn.title}</h4>
-		<f:if condition="{superiorColumn.limitValue} != 0">
-			{superiorColumn.limitValue}
+		<h4>{column.title}</h4>
+		<f:if condition="{column.limitValue} != 0">
+			{column.limitValue}
 		</f:if>
-		<f:if condition="{superiorColumn.isFirst} != {superiorColumn.isLast}">
+		<f:if condition="{column.isFirst} != {column.isLast}">
 			<f:else>
 				<div class="btn-group">
 					<a class="btn dropdown-toggle btn-danger" data-toggle="dropdown" rel="tooltip" data-placement="top" data-original-title="Deletes all sub-columns, tickets are pushed to the next column left-sided" href="#">
@@ -14,7 +14,7 @@
 					</a>
 					<ul class="dropdown-menu">
 						<li>
-							<f:link.action controller="SuperiorColumn" action="delete" arguments="{superiorColumn: superiorColumn, board: board}">
+							<f:link.action controller="Column" action="delete" arguments="{column: column}">
 								Confirm
 							</f:link.action>
 						</li>
@@ -26,16 +26,24 @@
 	</div>
 	</div>
 	<div class="span2">
-		<f:if condition="{superiorColumn.isLast} != 1">
+		<f:if condition="{column.isLast} != 1">
 
-			<a data-toggle="modal" data-target="#newSuperiorColumn{superiorColumn.sort}" role="button" rel="tooltip" data-placement="bottom" data-original-title="Creates a new column" class="btn">+</a>
+			<a data-toggle="modal" data-target="#newcolumn{column.sort}-{column.parentColumn.sort}" role="button" rel="tooltip" data-placement="bottom" data-original-title="Creates a new column" class="btn">+</a>
 
-			<div id="newSuperiorColumn{superiorColumn.sort}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newSuperiorColumn{superiorColumn.sort}Label" aria-hidden="true">
+			<div id="newcolumn{column.sort}-{column.parentColumn.sort}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newcolumn{column.sort}-{column.parentColumn.sort}Label" aria-hidden="true">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h3 id="newSuperiorColumn{superiorColumn.sort}Label">Create a new column</h3>
+					<h3 id="newcolumn{column.sort}-{column.parentColumn.sort}Label">Create a new column</h3>
 				</div>
-				<f:form action="create" arguments="{board: board}" controller="SuperiorColumn" name="newSuperiorColumn" class="form-horizontal">
+				<f:form action="create" controller="Column" name="newColumn" class="form-horizontal">
+					<f:if condition="{column.board}">
+						<f:then>
+							<f:form.hidden property="board" id="board" value="{column.board}"/>
+						</f:then>
+						<f:else>
+							<f:form.hidden property="parentColumn" id="parentColumn" value="{column}"/>
+						</f:else>
+					</f:if>
 					<f:form.hidden property="sort" id="sort" value="{iterator.cycle}"/>
 					<div class="modal-body">
 						<div class="control-group">

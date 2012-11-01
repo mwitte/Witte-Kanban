@@ -10,7 +10,6 @@ use TYPO3\Flow\Annotations as Flow;
 
 use TYPO3\Flow\Mvc\Controller\ActionController;
 use \Witte\Kanban\Domain\Model\Board;
-use \Witte\Kanban\Domain\Model\SuperiorColumn;
 
 /**
  * Base controller for the Witte.Kanban package
@@ -27,15 +26,9 @@ abstract class AbstractController extends ActionController {
 
 	/**
 	 * @Flow\Inject
-	 * @var \Witte\Kanban\Domain\Repository\SuperiorColumnRepository
+	 * @var \Witte\Kanban\Domain\Repository\ColumnRepository
 	 */
-	protected $superiorColumnRepository;
-
-	/**
-	 * @Flow\Inject
-	 * @var \Witte\Kanban\Domain\Repository\SubColumnRepository
-	 */
-	protected $subColumnRepository;
+	protected $columnRepository;
 
 	/**
 	 * @Flow\Inject
@@ -51,15 +44,9 @@ abstract class AbstractController extends ActionController {
 
 	/**
 	 * @Flow\Inject
-	 * @var \Witte\Kanban\Domain\Service\SuperiorColumnService
+	 * @var \Witte\Kanban\Domain\Service\ColumnService
 	 */
-	protected $superiorColumnService;
-
-	/**
-	 * @Flow\Inject
-	 * @var \Witte\Kanban\Domain\Service\SubColumnService
-	 */
-	protected $subColumnService;
+	protected $columnService;
 
 	/**
 	 * @Flow\Inject

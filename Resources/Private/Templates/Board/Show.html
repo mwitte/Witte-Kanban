@@ -5,8 +5,8 @@
 	<div class="row-fluid">
 		<div class="span12">
 			<div class="row-fluid">
-				<f:for each="{board.superiorColumns}" as="superiorColumn">
-					<f:render partial="BoardGrid/SuperiorColumn" arguments="{superiorColumn: superiorColumn}"/>
+				<f:for each="{board.columns}" as="column">
+					<f:render partial="BoardGrid/Column" arguments="{column: column}"/>
 				</f:for>
 			</div>
 		</div>

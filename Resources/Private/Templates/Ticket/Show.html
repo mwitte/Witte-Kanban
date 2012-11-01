@@ -1,17 +1,44 @@
 <f:layout name="Frontend" />
 
 <f:section name="Content">
-
 	<div class="row-fluid">
-		<div class="span12">
+		<div class="span8 offset2">
 			<h1>{ticket.title}</h1>
+			<dl class="dl-horizontal">
+				<f:if condition="{ticket.column.isFirst} == 1">
+					<dt>created:</dt>
+					<dd><f:format.date>{ticket.created}</f:format.date></dd>
+				</f:if>
+				<f:if condition="{ticket.column.isFirst} != {ticket.column.isLast}">
+					<f:else>
+						<dt>Created:</dt>
+						<dd><f:format.date>{ticket.created}</f:format.date></dd>
+						<dt>Started: </dt>
+						<dd><f:format.date>{ticket.started}</f:format.date></dd>
+					</f:else>
+				</f:if>
+				<f:if condition="{ticket.column.isLast} == 1">
+					<dt>Created:</dt>
+					<dd><f:format.date>{ticket.created}</f:format.date></dd>
+					<dt>Started: </dt>
+					<dd><f:format.date>{ticket.started}</f:format.date></dd>
+					<dt>Finished: </dt>
+					<dd><f:format.date>{ticket.moved}</f:format.date></dd>
+				</f:if>
+					<dt>Version: </dt>
+					<dd>{ticket.version}</dd>
+			</dl>
 			<p>
-				<f:format.date>{ticket.created}</f:format.date>
-			</p>
-			<p>
+			<div class="well well-large">
+				<h4>Description</h4>
 				<f:format.nl2br>{ticket.description}</f:format.nl2br>
-			</p>
-
+			</div>
+			<f:link.action class="btn" action="show" controller="Board" arguments="{board: board}">
+				<i class="icon-circle-arrow-left"></i> Back
+			</f:link.action>
+			<f:link.action class="btn btn-warning" action="edit" controller="Ticket" arguments="{ticket: ticket}">
+				<i class="icon-pencil icon-white"></i> Edit
+			</f:link.action>
 		</div>
 	</div>
 </f:section>
