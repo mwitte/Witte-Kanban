@@ -6,7 +6,7 @@ This a simple private project to learn something about TYPO3 Flow.
 Installation
 ------------
 
-Copy the Package to the folder "<FlowInstance>/Packages/Application" of your TYPO3 Flow instance.
+Copy the package to the folder "<FlowInstance>/Packages/Application" of your TYPO3 Flow instance.
 
 
 ### Activate the package:
@@ -32,7 +32,7 @@ the following content:
           package: Witte.Kanban
 
 
-Call the application in the browser by http://<your-host>/witte.kanban
+Call the application in the browser by http://your-host/witte.kanban
 
 Licence
 -------
@@ -41,4 +41,5 @@ This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAl
 ### Author
 
 Matthias Witte
-(http://www.matthias-witte.net/)
+
+http://www.matthias-witte.net/
