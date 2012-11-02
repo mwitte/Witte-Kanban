@@ -88,7 +88,7 @@ class BoardService extends AbstractService {
 		if($column->getBoard()){
 			return $column->getBoard();
 		}else{
-			$this->getBoardByColumn($column->getParentColumn());
+			return $this->getBoardByColumn($column->getParentColumn());
 		}
 	}
 
@@ -99,7 +99,7 @@ class BoardService extends AbstractService {
 	 * @return bool|\Witte\Kanban\Domain\Model\Column
 	 */
 	public function getFirstLowestLevelColumn(Board $board){
-		if($board->getColumns()){
+		if($board->getColumns()->count() > 0){
 			return $this->columnService->getFirstLowestLevelColumnByColumn($board->getColumns()->first());
 		}else{
 			return FALSE;
@@ -113,7 +113,7 @@ class BoardService extends AbstractService {
 	 * @return bool|\Witte\Kanban\Domain\Model\Column
 	 */
 	public function getLastLowestLevelColumn(Board $board){
-		if($board->getColumns()){
+		if($board->getColumns()->count() > 0){
 			return $this->columnService->getLastLowestLevelColumnByColumn($board->getColumns()->last());
 		}else{
 			return FALSE;

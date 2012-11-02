@@ -49,6 +49,7 @@ class Board {
 
 	public function __construct(){
 		$this->columns = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->ticketArchive = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->created = new \DateTime();
 	}
 

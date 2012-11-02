@@ -6,6 +6,7 @@ namespace Witte\Kanban\Tests\Unit\Domain\Model;
  *                                                                        *
  *                                                                        */
 
+use \Witte\Kanban\Domain\Model\Board;
 /**
  * Testcase for Board
  */
@@ -14,12 +15,40 @@ class BoardTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function makeSureThatSomethingHolds() {
-		$this->markTestIncomplete('Automatically generated test case; you need to adjust this!');
+	public function getSetTitle(){
+		$board = new Board();
+		$board->setTitle('My new Board');
+		$this->assertEquals('My new Board', $board->getTitle());
+	}
 
-		$expected = 'Foo';
-		$actual = 'Foo'; // This should be the result of some function call
-		$this->assertSame($expected, $actual);
+	/**
+	 * @test
+	 */
+	public function getSetCreated(){
+		$mockDateTime = $this->getMock('\DateTime');
+		$board = new Board();
+		$board->setCreated($mockDateTime);
+		$this->assertEquals($mockDateTime, $board->getCreated());
+	}
+
+	/**
+	 * @test
+	 */
+	public function getSetColumns(){
+		$mockArrayCollection = $this->getMock('Doctrine\Common\Collections\ArrayCollection', array(), array(), '', FALSE);
+		$board = new Board();
+		$board->setColumns($mockArrayCollection);
+		$this->assertEquals($mockArrayCollection, $board->getColumns());
+	}
+
+	/**
+	 * @test
+	 */
+	public function getSetTicketArchive(){
+		$mockArrayCollection = $this->getMock('Doctrine\Common\Collections\ArrayCollection', array(), array(), '', FALSE);
+		$board = new Board();
+		$board->setTicketArchive($mockArrayCollection);
+		$this->assertEquals($mockArrayCollection, $board->getTicketArchive());
 	}
 }
 ?>

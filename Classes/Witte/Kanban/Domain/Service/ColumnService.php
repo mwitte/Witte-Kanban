@@ -130,7 +130,7 @@ class ColumnService extends AbstractService {
 	 */
 	public function getFirstLowestLevelColumnByColumn(Column $column){
 		if($column->getSubColumns()->count() > 0){
-			$this->getFirstLowestLevelColumnByColumn($column->getSubColumns()->first());
+			return $this->getFirstLowestLevelColumnByColumn($column->getSubColumns()->first());
 		}else{
 			return $column;
 		}
@@ -144,7 +144,7 @@ class ColumnService extends AbstractService {
 	 */
 	public function getLastLowestLevelColumnByColumn(Column $column){
 		if($column->getSubColumns()->count() > 0){
-			$this->getLastLowestLevelColumnByColumn($column->getSubColumns()->last());
+			return $this->getLastLowestLevelColumnByColumn($column->getSubColumns()->last());
 		}else{
 			return $column;
 		}
