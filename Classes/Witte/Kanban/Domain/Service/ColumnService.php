@@ -159,17 +159,19 @@ class ColumnService extends AbstractService {
 	public function getPreviousColumn(Column $column){
 		$siblings = $this->getSiblings($column);
 		// if the given column is the first of the siblings
-		if($siblings->first() === $column){
+		if($siblings->first() == $column){
 			// if the column has a parent column
 			if($column->getParentColumn()){
 				// get the previous column for the parent column
-				$previousColumn = $this->getPreviousColumn($column->getParentColumn());
+				$previousColumnCandidate = $this->getPreviousColumn($column->getParentColumn());
 			}else{
 				return false;
 			}
 		}else{
-			$previousColumn = $siblings->get($siblings->indexOf($column) - 1);
+			$previousColumnCandidate = $siblings->get($siblings->indexOf($column) - 1);
 		}
+		// get the last lowest level column
+		$previousColumn = $this->getLastLowestLevelColumnByColumn($previousColumnCandidate);
 		return $previousColumn;
 	}
 
@@ -186,13 +188,14 @@ class ColumnService extends AbstractService {
 			// if the column has a parent column
 			if($column->getParentColumn()){
 				// get the next column for the parent column
-				$nextColumn = $this->getNextColumn($column->getParentColumn());
+				$nextColumnCandidate = $this->getNextColumn($column->getParentColumn());
 			}else{
 				return false;
 			}
 		}else{
-			$nextColumn = $siblings->get($siblings->indexOf($column) + 1);
+			$nextColumnCandidate = $siblings->get($siblings->indexOf($column) + 1);
 		}
+		$nextColumn = $this->getFirstLowestLevelColumnByColumn($nextColumnCandidate);
 		return $nextColumn;
 	}
 

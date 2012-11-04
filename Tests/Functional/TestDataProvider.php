@@ -104,6 +104,36 @@ class TestDataProvider {
 	/**
 	 * @return \Witte\Kanban\Domain\Model\Column
 	 */
+	public function getColumnWithSubColumns(){
+		$column = $this->getColumn();
+		for($i=0; $i < 3; $i++){
+			$subColumn = $this->getColumn();
+			$column->addSubColumn($subColumn);
+			$subColumn->setParentColumn($column);
+			$this->columnRepository->update($subColumn);
+		}
+		$this->columnRepository->update($column);
+		return $column;
+	}
+
+	/**
+	 * @return \Witte\Kanban\Domain\Model\Column
+	 */
+	public function getColumnWithSubColumnsWithSubColumns(){
+		$column = $this->getColumn();
+		for($i=0; $i < 3; $i++){
+			$subColumn = $this->getColumnWithSubColumns();
+			$column->addSubColumn($subColumn);
+			$subColumn->setParentColumn($column);
+			$this->columnRepository->update($subColumn);
+		}
+		$this->columnRepository->update($column);
+		return $column;
+	}
+
+	/**
+	 * @return \Witte\Kanban\Domain\Model\Column
+	 */
 	public function getColumnWithSubColumnWithTicket(){
 		$column = $this->getColumnWithSubColumn();
 		$subColumn = $column->getSubColumns()->first();
@@ -133,7 +163,22 @@ class TestDataProvider {
 	/**
 	 * @return \Witte\Kanban\Domain\Model\Board
 	 */
-	public function getBoardWithColumnsSubColumnsTickets(){
+	public function getBoardWithColumns(){
+		$board = $this->getBoard();
+		for($i=0; $i < 3; $i++){
+			$column = $this->getColumn();
+			$column->setBoard($board);
+			$board->addColumn($column);
+			$this->columnRepository->update($column);
+		}
+		$this->boardRepository->update($board);
+		return $board;
+	}
+
+	/**
+	 * @return \Witte\Kanban\Domain\Model\Board
+	 */
+	public function getBoardWithColumnsSubColumnsTicket(){
 		$board = $this->getBoard();
 		// create three columns with subColumns and tickets
 		for($i=0; $i < 3; $i++){
@@ -149,7 +194,7 @@ class TestDataProvider {
 	/**
 	 * @return \Witte\Kanban\Domain\Model\Board
 	 */
-	public function getBoardWithColumnsTicketsSubColumnsTickets(){
+	public function getBoardWithColumnsTicketSubColumnsTicket(){
 		$board = $this->getBoard();
 		// create three columns with subColumns and tickets
 		for($i=0; $i < 3; $i++){

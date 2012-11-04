@@ -60,7 +60,7 @@ class BoardServiceTest extends \TYPO3\Flow\Tests\FunctionalTestCase {
 	 * @test
 	 */
 	public function getBoardByTicket(){
-		$board = $this->testDataProvider->getBoardWithColumnsTicketsSubColumnsTickets();
+		$board = $this->testDataProvider->getBoardWithColumnsTicketSubColumnsTicket();
 		/** @var $ticketInColumn \Witte\Kanban\Domain\Model\Ticket */
 		$ticketInColumn = $board->getColumns()->first()->getTickets()->first();
 		$this->assertEquals($board, $this->boardService->getBoardByTicket($ticketInColumn), 'Board should be equal by column ticket');
