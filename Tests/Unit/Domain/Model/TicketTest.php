@@ -3,8 +3,8 @@ namespace Witte\Kanban\Tests\Unit\Domain\Model;
 
 /*                                                                        *
  * This script belongs to the TYPO3 Flow package "Witte.Kanban".          *
- *                                                                        *
- *                                                                        */
+ * Copyright (C) 2012 Matthias Witte                                      *
+ * http://www.matthias-witte.net                                          */
 
 use \Witte\Kanban\Domain\Model\Ticket;
 /**

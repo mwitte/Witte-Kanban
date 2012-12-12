@@ -3,8 +3,8 @@ namespace Witte\Kanban\Controller;
 
 /*                                                                        *
  * This script belongs to the TYPO3 Flow package "Witte.Kanban".          *
- *                                                                        *
- *                                                                        */
+ * Copyright (C) 2012 Matthias Witte                                      *
+ * http://www.matthias-witte.net                                          */
 
 use TYPO3\Flow\Annotations as Flow;
 

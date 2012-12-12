@@ -1,7 +1,7 @@
-Witte.Kanban
+Witte:Kanban
 ============
 
-This a simple private project to learn something about TYPO3 Flow.
+This a simple project to learn something about TYPO3 Flow so you'll need TYPO3 Flow to run this application.
 
 Installation
 ------------
@@ -26,7 +26,7 @@ the following content:
 
     -
       name: 'Kanban'
-      uriPattern: '<KanbanSubroutes>'
+      uriPattern: 'witte.kanban<KanbanSubroutes>'
       subRoutes:
         KanbanSubroutes:
           package: Witte.Kanban
@@ -36,7 +36,14 @@ Call the application in the browser by http://your-host/witte.kanban
 
 Licence
 -------
-This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+Witte:Kanban is a simple TYPO3 Flow Application which provides Kanban boards with multiple columns and tickets.
+Copyright (C) 2012 Matthias Witte
+http://www.matthias-witte.net/
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 3 of the License, or
+(at your option) any later version.
 
 ### Author
 

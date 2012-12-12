@@ -1,36 +1,35 @@
-How to install Witte.Kanban
----------------------------
+Witte:Kanban
+============
 
-Copy sources
-************
+This a simple project to learn something about TYPO3 Flow so you'll need TYPO3 Flow to run this application.
 
-Copy the Package to the folder "<FlowInstance>/Packages/Application" of your TYPO3 Flow instance.
+Installation
+------------
 
-
-Activate the package:
-*********************
-
-./flow package:activate Witte.Kanban
+Copy the package to the folder "<FlowInstance>/Packages/Application" of your TYPO3 Flow instance.
 
 
-Migrate the database:
-*********************
+### Activate the package:
 
-./flow doctrine:migrate
+    ./flow package:activate Witte.Kanban
 
 
-Add Route
-*********
+### Migrate the database:
+
+    ./flow doctrine:migrate
+
+
+### Add Route
 
 Add a route to the Routes.yaml of your TYPO3 Flow instance("<FlowInstance>/Configuration/Routes.yaml") with
 the following content:
 
--
-  name: 'Kanban'
-  uriPattern: 'witte.kanban<KanbanSubroutes>'
-  subRoutes:
-    KanbanSubroutes:
-      package: Witte.Kanban
+    -
+      name: 'Kanban'
+      uriPattern: 'witte.kanban<KanbanSubroutes>'
+      subRoutes:
+        KanbanSubroutes:
+          package: Witte.Kanban
 
 
-Call the Kanban system in the browser by http://yourhost/witte.kanban
+Call the application in the browser by http://your-host/witte.kanban
