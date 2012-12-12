@@ -1,7 +1,7 @@
 <div class="span{column.columnWith -> f:format.number(decimals: 0)}">
 	<div class="span9">
 	<div class="row-fluid">
-		<h4>{column.title}</h4>
+		<h4 class="column">{column.title}</h4>
 		<f:if condition="{column.limitValue} != 0">
 			{column.limitValue}
 		</f:if>
@@ -20,10 +20,11 @@
 						</li>
 					</ul>
 				</div>
+				<br/>
 			</f:else>
 		</f:if>
 
-		<f:if condition="{column.subColumns -> f:count()}">
+		<f:if condition="{column.subColumns -> f:count()} > 0">
 			<f:then>
 				<div class="row-fluid">
 				<f:for each="{column.subColumns}" as="subColumn">
@@ -41,7 +42,15 @@
 	<div class="span3">
 		<f:if condition="{column.isLast} != 1">
 
-			<f:render partial="BoardGrid/NewColumn" arguments="{after: 'after', column: column, board: board, iterator: iterator}"/>
+			<f:if condition="{board}">
+				<f:then>
+					<f:render partial="BoardGrid/NewColumn" arguments="{after: 'after', column: column, board: board, iterator: iterator}"/>
+				</f:then>
+				<f:else>
+					<f:render partial="BoardGrid/NewColumn" arguments="{after: 'after', column: column.parentColumn, iterator: iterator}"/>
+				</f:else>
+			</f:if>
+
 		</f:if>
 	</div>
 

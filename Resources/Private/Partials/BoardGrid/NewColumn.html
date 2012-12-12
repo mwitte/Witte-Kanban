@@ -11,7 +11,7 @@
 				<f:form.hidden property="board" id="board" value="{column.board}"/>
 			</f:then>
 			<f:else>
-				<f:form.hidden property="parentColumn" id="parentColumn" value="{column.parentColumn}"/>
+				<f:form.hidden property="parentColumn" id="parentColumn" value="{column}"/>
 			</f:else>
 		</f:if>
 		<f:form.hidden property="sort" id="sort" value="{column.sort}"/>

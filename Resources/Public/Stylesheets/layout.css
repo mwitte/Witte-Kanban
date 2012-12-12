@@ -29,3 +29,8 @@ div.ticket-box-description{
     -webkit-transition: max-height 0.5s; /* Safari and Chrome */
     -o-transition: max-height 0.5s; /* Opera */
 }
+
+
+h4.column{
+    border-top: 5px solid #ccc;
+}

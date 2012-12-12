@@ -41,7 +41,11 @@
 <div style="text-align: center;">
 	<small>Copyright (C) 2012 <a href="http://www.matthias-witte.net/">Matthias Witte</a> <strong>Licence todo</strong><!-- @todo --></small>
 </div>
-<f:render partial="Dialogs" arguments="{_all}"/>
+
+<f:if condition="{board}">
+	<f:render partial="Ticket/NewDialog" arguments="{board: board}"/>
+</f:if>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('a[rel=tooltip]').tooltip();
