@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use \Witte\Kanban\Domain\Model\Ticket;
 use \Witte\Kanban\Domain\Model\Column;
 use \Witte\Kanban\Domain\Service\AbstractService;
+use \Doctrine\Common\Collections\Collection;
 
 /**
  * Service
@@ -81,10 +82,36 @@ class ColumnService extends AbstractService {
 			$this->columnRepository->add($column);
 			$this->columnRepository->update($parentColumn);
 		}
+		$this->resortColumns($this->getSiblings($column), $column);
 	}
 
 	/**
-	 * Removes a column with all related columns. Moves the tickets to the next column left-sided
+	 * Resets the sort property of the given columnCollection.
+	 *
+	 * @param Collection $columns
+	 * @param null|Column $newColumn
+	 */
+	protected function resortColumns(Collection $columns, Column $newColumn = NULL){
+		$iterator = 0;
+		/* @var $column Column */
+		// iterate over all columns
+		foreach($columns as $column){
+			// only if it's not the newColumn and the sort equals the newColumn's sort
+			if($newColumn && $column != $newColumn && $iterator == $newColumn->getSort()){
+				$iterator++;
+			}
+
+			if($column != $newColumn){
+				$column->setSort($iterator);
+			}
+
+			$iterator = $column->getSort() + 1;
+			$this->columnRepository->update($column);
+		}
+	}
+
+	/**
+	 * Removes a column with all related columns. Moves the tickets to the parent, previous or next(in this direction) column
 	 *
 	 * @param Column $column
 	 * @return bool
@@ -222,5 +249,56 @@ class ColumnService extends AbstractService {
 	public function getColumnWidth(Column $column){
 		return $this->getQuotient($this->getSiblings($column)->count());
 	}
+
+	/**
+	 * not sure why I implemented this method a second time(start)
+	 */
+
+	/**
+	 * Removes the given column with all subColumns recursively and
+	 * moves tickets to the parent or previous column
+	 *
+	 * @param Column $column
+	 */
+	public function removeColumn(Column $column){
+		// iterate over subColumns
+		foreach($column->getSubColumns() as $subColumn){
+			// recursive call
+			$this->deleteColumn($subColumn);
+		}
+		$this->removeTicketsFromColumn($column);
+		// if there is a parent column
+		if($column->getParentColumn()){
+			$parentColumn = $column->getParentColumn();
+			$parentColumn->removeSubColumn($column);
+			$this->columnRepository->update($parentColumn);
+		}else{
+			$board = $column->getBoard();
+			$board->removeColumn($column);
+			$this->boardRepository->update($board);
+		}
+		$this->columnRepository->remove($column);
+	}
+
+	/**
+	 * Removes tickets from the given column to a parent or previous column
+	 *
+	 * @param Column $column
+	 */
+	protected  function removeTicketsFromColumn(Column $column){
+		// iterate over tickets
+		foreach($column->getTickets() as $ticket){
+			// try to move ticket to parent column
+			if(!$this->ticketService->moveTicketToParentColumn($ticket)){
+				// try to move ticket to previous column
+				$this->ticketService->moveTicketToPreviousColumn($ticket);
+			}
+		}
+	}
+
+	/**
+	 * not sure why I implemented this method a second time(end)
+	 */
+
 }
 ?>

@@ -32,6 +32,7 @@ class ColumnController extends AbstractController {
 	 * @param \Witte\Kanban\Domain\Model\Column $newColumn
 	 */
 	public function createAction(Column $newColumn) {
+		$newColumn->setSort($newColumn->getSort() + 1 );
 		$this->columnService->addNewColumn($newColumn);
 		$this->redirect('edit', 'Board', NULL, array('board' => $this->boardService->getBoardByColumn($newColumn)));
 	}

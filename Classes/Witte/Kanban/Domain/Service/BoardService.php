@@ -119,5 +119,9 @@ class BoardService extends AbstractService {
 			return FALSE;
 		}
 	}
+
+	public function deleteBoard(Board $board){
+		// @todo
+	}
 }
 ?>

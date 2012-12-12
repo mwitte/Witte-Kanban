@@ -90,6 +90,10 @@ class Column {
 		$this->created = new \DateTime();
 	}
 
+	public function getUniqueIdentifier(){
+		return $this->Persistence_Object_Identifier;
+	}
+
 	/**
 	 * @param \Witte\Kanban\Domain\Model\Board $board
 	 */

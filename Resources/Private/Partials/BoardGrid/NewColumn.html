@@ -1,0 +1,31 @@
+<a data-toggle="modal" data-target="#newcolumn-{column.uniqueIdentifier}-{after}" role="button" rel="tooltip" data-placement="bottom" data-original-title="Creates a new column" class="btn">+</a>
+
+<div id="newcolumn-{column.uniqueIdentifier}-{after}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newcolumn-{column.uniqueIdentifier}-{after}Label" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h3 id="newcolumn-{column.uniqueIdentifier}-{after}Label">Create a new column</h3>
+	</div>
+	<f:form action="create" controller="Column" name="newColumn" class="form-horizontal">
+		<f:if condition="{board}">
+			<f:then>
+				<f:form.hidden property="board" id="board" value="{column.board}"/>
+			</f:then>
+			<f:else>
+				<f:form.hidden property="parentColumn" id="parentColumn" value="{column.parentColumn}"/>
+			</f:else>
+		</f:if>
+		<f:form.hidden property="sort" id="sort" value="{column.sort}"/>
+		<div class="modal-body">
+			<div class="control-group">
+				<label class="control-label" for="title">Title</label>
+				<div class="controls">
+					<f:form.textfield property="title" id="title" />
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button class="btn" data-dismiss="modal">Close</button>
+			<f:form.submit value="Create" class="btn btn-primary" />
+		</div>
+	</f:form>
+</div>

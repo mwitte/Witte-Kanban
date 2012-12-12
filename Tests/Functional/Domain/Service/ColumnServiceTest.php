@@ -198,6 +198,20 @@ class ColumnServiceTest extends \TYPO3\Flow\Tests\FunctionalTestCase {
 		$columnWithSubColumnsWithSubColumns = $this->testDataProvider->getColumnWithSubColumnsWithSubColumns();
 		$this->assertEquals(4, $this->columnService->getColumnWidth($columnWithSubColumnsWithSubColumns->getSubColumns()->first()));
 	}
+
+	/**
+	 * @test
+	 */
+	public function removeColumn(){
+		$boardWithColumnsSubColumnsTicket = $this->testDataProvider->getBoardWithColumnsSubColumnsTicket();
+		$this->assertEquals(0, $boardWithColumnsSubColumnsTicket->getColumns()->first()->getTickets()->count());
+		$this->assertEquals(1, $boardWithColumnsSubColumnsTicket->getColumns()->first()->getSubColumns()->first()->getTickets()->count());
+		$this->columnService->removeColumn($boardWithColumnsSubColumnsTicket->getColumns()->first()->getSubColumns()->first());
+		$this->assertEquals(0, $boardWithColumnsSubColumnsTicket->getColumns()->first()->getSubColumns()->count());
+		$this->assertEquals(1, $boardWithColumnsSubColumnsTicket->getColumns()->first()->getTickets()->count());
+
+
+	}
 }
 
 ?>

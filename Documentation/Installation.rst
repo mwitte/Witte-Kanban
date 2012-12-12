@@ -27,7 +27,10 @@ the following content:
 
 -
   name: 'Kanban'
-  uriPattern: '<KanbanSubroutes>'
+  uriPattern: 'witte.kanban<KanbanSubroutes>'
   subRoutes:
     KanbanSubroutes:
       package: Witte.Kanban
+
+
+Call the Kanban system in the browser by http://yourhost/witte.kanban

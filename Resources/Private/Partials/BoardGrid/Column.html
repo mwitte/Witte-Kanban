@@ -6,7 +6,7 @@
 		</f:if>
 	</div>
 	<div class="row-fluid">
-		<f:if condition="{column.subColumns -> f:count()} > 1">
+		<f:if condition="{column.subColumns -> f:count()} > 0">
 			<f:then>
 				<f:for each="{column.subColumns}" as="subColumn">
 					<f:render partial="BoardGrid/Column" arguments="{column: subColumn}"/>

@@ -1,5 +1,5 @@
 <div class="span{column.columnWith -> f:format.number(decimals: 0)}">
-	<div class="span10">
+	<div class="span9">
 	<div class="row-fluid">
 		<h4>{column.title}</h4>
 		<f:if condition="{column.limitValue} != 0">
@@ -23,42 +23,26 @@
 			</f:else>
 		</f:if>
 
+		<f:if condition="{column.subColumns -> f:count()}">
+			<f:then>
+				<div class="row-fluid">
+				<f:for each="{column.subColumns}" as="subColumn">
+					<f:render partial="BoardGrid/EditColumn" arguments="{column: subColumn, iterator: iterator}"/>
+				</f:for>
+				</div>
+			</f:then>
+			<f:else>
+				<f:render partial="BoardGrid/NewColumn" arguments="{column: column, iterator: iterator}"/>
+			</f:else>
+		</f:if>
+
 	</div>
 	</div>
-	<div class="span2">
+	<div class="span3">
 		<f:if condition="{column.isLast} != 1">
 
-			<a data-toggle="modal" data-target="#newcolumn{column.sort}-{column.parentColumn.sort}" role="button" rel="tooltip" data-placement="bottom" data-original-title="Creates a new column" class="btn">+</a>
-
-			<div id="newcolumn{column.sort}-{column.parentColumn.sort}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newcolumn{column.sort}-{column.parentColumn.sort}Label" aria-hidden="true">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h3 id="newcolumn{column.sort}-{column.parentColumn.sort}Label">Create a new column</h3>
-				</div>
-				<f:form action="create" controller="Column" name="newColumn" class="form-horizontal">
-					<f:if condition="{column.board}">
-						<f:then>
-							<f:form.hidden property="board" id="board" value="{column.board}"/>
-						</f:then>
-						<f:else>
-							<f:form.hidden property="parentColumn" id="parentColumn" value="{column}"/>
-						</f:else>
-					</f:if>
-					<f:form.hidden property="sort" id="sort" value="{iterator.cycle}"/>
-					<div class="modal-body">
-						<div class="control-group">
-							<label class="control-label" for="title">Title</label>
-							<div class="controls">
-								<f:form.textfield property="title" id="title" />
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button class="btn" data-dismiss="modal">Close</button>
-						<f:form.submit value="Create" class="btn btn-primary" />
-					</div>
-				</f:form>
-			</div>
+			<f:render partial="BoardGrid/NewColumn" arguments="{after: 'after', column: column, board: board, iterator: iterator}"/>
 		</f:if>
 	</div>
+
 </div>
