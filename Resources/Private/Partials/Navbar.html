@@ -10,7 +10,7 @@
 			</a>
 
 			<!-- Be sure to leave the brand out there if you want it shown -->
-			<f:link.action class="brand" action="index" controller="Base">W:Kanban</f:link.action>
+			<f:link.action class="brand" action="index" controller="Base"><f:translate id="wittekanban.name"/></f:link.action>
 
 			<!-- Everything you want hidden at 940px or less, place within here -->
 			<div class="nav-collapse">
@@ -63,19 +63,19 @@
 					<f:if condition="{board}">
 						<li>
 							<f:link.action action="archive" controller="Ticket" arguments="{board: board}">
-								<i class="icon-folder-open icon-white"></i> Ticket archive
+								<i class="icon-folder-open icon-white"></i> <f:translate id="ticket.archive"/>
 							</f:link.action>
 						</li>
 						<li class="divider-vertical"></li>
 						<li>
 							<f:link.action action="edit" controller="Board" arguments="{board: board}">
-								<i class="icon-pencil icon-white"></i> Edit board
+								<i class="icon-pencil icon-white"></i> <f:translate id="board.edit"/>
 							</f:link.action>
 						</li>
 						<li class="divider-vertical"></li>
 						<li>
 							<a data-toggle="modal" href="#createTicket">
-								<i class="icon-plus icon-white"></i> New Ticket
+								<i class="icon-plus icon-white"></i> <f:translate id="ticket.new"/>
 							</a>
 						</li>
 					</f:if>

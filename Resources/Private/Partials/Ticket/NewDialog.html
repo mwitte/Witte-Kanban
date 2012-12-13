@@ -1,34 +1,34 @@
 <div id="createTicket" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="createTicketLabel" aria-hidden="true">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		<h3 id="createTicketLabel">Create a Ticket</h3>
+		<h3 id="createTicketLabel"><f:translate id="ticket.create.headline"/></h3>
 	</div>
 	<f:form action="create" arguments="{board: board}" controller="Ticket" name="newTicket" class="form-horizontal">
 		<div class="modal-body">
 
-			<legend>for {board.title}</legend>
+			<legend><f:translate id="word.for"/> {board.title}</legend>
 			<div class="control-group">
-				<label class="control-label" for="title">Title</label>
+				<label class="control-label" for="title"><f:translate id="ticket.title"/></label>
 				<div class="controls">
 					<f:form.textfield property="title" id="title"/>
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="description">Description</label>
+				<label class="control-label" for="description"><f:translate id="ticket.description"/></label>
 				<div class="controls">
 					<f:form.textarea class="input-xlarge" rows="6" property="description" id="description" />
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="version">Version</label>
+				<label class="control-label" for="version"><f:translate id="ticket.version"/></label>
 				<div class="controls">
-					<f:form.textfield property="version" id="version" additionalAttributes="{placeholder: 'optional'}"/>
+					<f:form.textfield property="version" id="version" additionalAttributes="{placeholder: '{f:translate(id: \'form.optional\')}'}"/>
 				</div>
 			</div>
 		</div>
 		<div class="modal-footer">
-			<button class="btn" data-dismiss="modal">Close</button>
-			<f:form.submit value="Create" class="btn btn-primary" />
+			<button class="btn" data-dismiss="modal"><f:translate id="btn.close"/></button>
+			<f:form.submit value="{f:translate(id: 'btn.create')}" class="btn btn-primary" />
 		</div>
 	</f:form>
 </div>

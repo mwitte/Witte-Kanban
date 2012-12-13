@@ -8,14 +8,14 @@
 		<f:if condition="{column.isFirst} != {column.isLast}">
 			<f:else>
 				<div class="btn-group">
-					<a class="btn dropdown-toggle btn-danger" data-toggle="dropdown" rel="tooltip" data-placement="top" data-original-title="Deletes all sub-columns, tickets are pushed to the next column left-sided" href="#">
-						<i class="icon-trash icon-white"></i> Delete
+					<a class="btn dropdown-toggle btn-danger" data-toggle="dropdown" rel="tooltip" data-placement="top" data-original-title="{f:translate(id: 'column.delete.legend')}" href="#">
+						<i class="icon-trash icon-white"></i> <f:translate id="column.delete"/>
 						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
 						<li>
 							<f:link.action controller="Column" action="delete" arguments="{column: column}">
-								Confirm
+								<f:translate id="column.delete.confirm"/>
 							</f:link.action>
 						</li>
 					</ul>

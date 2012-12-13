@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file original="" source-language="en" datatype="plaintext">
+		<body>
+			<trans-unit id="wittekanban.name">
+				<source>W:Kanban</source>
+			</trans-unit>
+			<trans-unit id="btn.back">
+				<source>Back</source>
+			</trans-unit>
+			<trans-unit id="btn.save">
+				<source>Save</source>
+			</trans-unit>
+			<trans-unit id="btn.close">
+				<source>Close</source>
+			</trans-unit>
+			<trans-unit id="btn.create">
+				<source>Create</source>
+			</trans-unit>
+			<trans-unit id="base.getStarted">
+				<source>Get started!</source>
+			</trans-unit>
+			<trans-unit id="board.create.new">
+				<source>Create a new Kanban board</source>
+			</trans-unit>
+			<trans-unit id="board.edit.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="board.edit.title.legend">
+				<source>This is the title for the new Kanban board</source>
+			</trans-unit>
+			<trans-unit id="base.project.info">
+				<source>Project info</source>
+			</trans-unit>
+			<trans-unit id="base.project.getInfo">
+				<source>Get some information about the project</source>
+			</trans-unit>
+			<trans-unit id="ticket.archive">
+				<source>Ticket archive</source>
+			</trans-unit>
+			<trans-unit id="ticket.new">
+				<source>New ticket</source>
+			</trans-unit>
+			<trans-unit id="ticket.create.headline">
+				<source>Create a ticket</source>
+			</trans-unit>
+			<trans-unit id="board.edit">
+				<source>Edit board</source>
+			</trans-unit>
+			<trans-unit id="board.edit.theColumns">
+				<source>Edit the board columns</source>
+			</trans-unit>
+			<trans-unit id="board.edit.boardProperties">
+				<source>Edit the board properties</source>
+			</trans-unit>
+			<trans-unit id="board.edit.boardProperties.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="ticket.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="ticket.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="ticket.version">
+				<source>Version</source>
+			</trans-unit>
+			<trans-unit id="ticket.created">
+				<source>Created</source>
+			</trans-unit>
+			<trans-unit id="ticket.started">
+				<source>Started</source>
+			</trans-unit>
+			<trans-unit id="ticket.finished">
+				<source>Finished</source>
+			</trans-unit>
+			<trans-unit id="ticket.btn.archive">
+				<source>Archive</source>
+			</trans-unit>
+			<trans-unit id="form.optional">
+				<source>optional</source>
+			</trans-unit>
+
+			<trans-unit id="column.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="column.delete">
+				<source>Delete</source>
+			</trans-unit>
+			<trans-unit id="column.delete.confirm">
+				<source>Confirm</source>
+			</trans-unit>
+			<trans-unit id="column.delete.legend">
+				<source>Deletes all sub-columns, tickets are pushed to the next column left-sided</source>
+			</trans-unit>
+			<trans-unit id="column.create.new">
+				<source>Create a new column</source>
+			</trans-unit>
+
+			<trans-unit id="word.for">
+				<source>for</source>
+			</trans-unit>
+
+
+		</body>
+	</file>
+</xliff>

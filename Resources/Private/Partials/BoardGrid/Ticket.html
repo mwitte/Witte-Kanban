@@ -39,21 +39,21 @@
 					</f:else>
 				</f:if>
 				<f:if condition="{ticket.column.isLast} == 1">
-					<dt>created:</dt>
+					<dt><f:translate id="ticket.created"/>:</dt>
 					<dd><f:format.date>{ticket.created}</f:format.date></dd>
-					<dt>started: </dt>
+					<dt><f:translate id="ticket.started"/>: </dt>
 					<dd><f:format.date>{ticket.started}</f:format.date></dd>
-					<dt>finished: </dt>
+					<dt><f:translate id="ticket.finished"/>: </dt>
 					<dd><f:format.date>{ticket.moved}</f:format.date></dd>
 				</f:if>
 				<f:if condition="{ticket.version}">
-					<dt>version: </dt>
+					<dt><f:translate id="ticket.version"/>: </dt>
 					<dd>{ticket.version}</dd>
 				</f:if>
 			</dl>
 			<f:if condition="{ticket.column.isLast} == 1">
 			<f:link.action class="btn btn-small btn-inverse pull-right" action="archiving" controller="Ticket" arguments="{ticket: ticket}">
-				<i class="icon-folder-open icon-white"></i> Archive
+				<i class="icon-folder-open icon-white"></i> <f:translate id="ticket.btn.archive"/>
 			</f:link.action>
 			</f:if>
 		</div>
