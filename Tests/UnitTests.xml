@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<phpunit
+		strict="true"
+		convertErrorsToExceptions="true"
+		convertNoticesToExceptions="true"
+		convertWarningsToExceptions="true"
+		timeoutForSmallTests="0"
+		bootstrap="/var/www/flow/TYPO3-Flow/Build/BuildEssentials/PhpUnit/UnitTestBootstrap.php">
+		<!-- Fully qualified path to the UnitTestBootstrap.php of your instance -->
+	<testsuites>
+		<testsuite name="All tests">
+			<directory>Unit</directory>
+		</testsuite>
+	</testsuites>
+	<filter>
+		<whitelist>
+			<directory suffix=".php">../Classes</directory>
+		</whitelist>
+	</filter>
+	<logging>
+		<log type="junit" target="../Reports/UnitTests.xml" logIncompleteSkipped="false"/>
+		<log type="testdox-text" target="../Reports/UnitTestDox.txt"/>
+	</logging>
+</phpunit>

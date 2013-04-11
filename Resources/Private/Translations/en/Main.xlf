@@ -74,6 +74,9 @@
 			<trans-unit id="ticket.finished">
 				<source>Finished</source>
 			</trans-unit>
+			<trans-unit id="ticket.file">
+				<source>File</source>
+			</trans-unit>
 			<trans-unit id="ticket.btn.archive">
 				<source>Archive</source>
 			</trans-unit>

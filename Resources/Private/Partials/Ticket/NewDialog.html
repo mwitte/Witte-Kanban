@@ -3,7 +3,7 @@
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 		<h3 id="createTicketLabel"><f:translate id="ticket.create.headline"/></h3>
 	</div>
-	<f:form action="create" arguments="{board: board}" controller="Ticket" name="newTicket" class="form-horizontal">
+	<f:form action="create" arguments="{board: board}" controller="Ticket" name="newTicket" class="form-horizontal" enctype="multipart/form-data">
 		<div class="modal-body">
 
 			<legend><f:translate id="word.for"/> {board.title}</legend>
@@ -23,6 +23,12 @@
 				<label class="control-label" for="version"><f:translate id="ticket.version"/></label>
 				<div class="controls">
 					<f:form.textfield property="version" id="version" additionalAttributes="{placeholder: '{f:translate(id: \'form.optional\')}'}"/>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="file"><f:translate id="ticket.file"/></label>
+				<div class="controls">
+					<f:form.upload property="file" id="file" />
 				</div>
 			</div>
 		</div>

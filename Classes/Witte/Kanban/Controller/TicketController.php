@@ -84,7 +84,6 @@ class TicketController extends AbstractController {
 	 * @param \Witte\Kanban\Domain\Model\Ticket $newTicket
 	 */
 	public function createAction(Board $board, Ticket $newTicket) {
-
 		$this->ticketService->createTicketInBoard($newTicket, $board);
 
 		$this->addFlashMessage('Created the new ticket ' . $newTicket->getTitle());

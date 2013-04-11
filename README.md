@@ -1,54 +1,53 @@
 Witte:Kanban
 ============
 
-This a simple project to learn something about TYPO3 Flow so you'll need TYPO3 Flow to run this application.
+This a simple project to learn something about TYPO3 Flow so you'll need TYPO3 Flow to run this application. More
+information about this project can be found in my
+[blog post](http://www.matthias-witte.net/wittekanban-a-typo3-flow-application/2012/12/).
 
 Installation
 ------------
 
-Copy the package to the folder "<FlowInstance>/Packages/Application" of your TYPO3 Flow instance.
+Copy the package to the folder "<FlowInstance>/Packages/Application" of your TYPO3 Flow instance and name it
+
+	Witte.Kanban
 
 
 ### Activate the package:
 
-    ./flow package:activate Witte.Kanban
+	./flow package:activate Witte.Kanban
 
 
 ### Migrate the database:
 
-    ./flow doctrine:migrate
+	./flow doctrine:migrate
 
 
 ### Add Route
 
-Add a route to the Routes.yaml of your TYPO3 Flow instance("<FlowInstance>/Configuration/Routes.yaml") with
+Add a route as first rule to the Routes.yaml of your TYPO3 Flow instance("<FlowInstance>/Configuration/Routes.yaml") with
 the following content:
 
-    -
-      name: 'Kanban'
-      uriPattern: 'witte.kanban<KanbanSubroutes>'
-      subRoutes:
-        KanbanSubroutes:
-          package: Witte.Kanban
+	-
+	  name: 'Kanban'
+	  uriPattern: 'kanban<KanbanSubroutes>'
+	  subRoutes:
+	    KanbanSubroutes:
+	      package: Witte.Kanban
 
 
-Call the application in the browser by http://your-host/witte.kanban
+Call the application in the browser by http://your-host/kanban
 
 Licence
 -------
 Witte:Kanban is a simple TYPO3 Flow Application which provides Kanban boards with multiple columns and tickets.
-Copyright (C) 2012 Matthias Witte
-http://www.matthias-witte.net/
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 3 of the License, or
 (at your option) any later version.
 
-### Author
-
-Matthias Witte
-http://www.matthias-witte.net/
+Copyright (C) 2012 Matthias Witte http://www.matthias-witte.net/
 
 ### Twitter Bootstrap
 

@@ -65,6 +65,12 @@ class Ticket {
 	 */
 	protected $board;
 
+	/**
+	 * @var \TYPO3\Flow\Resource\Resource
+	 * @ORM\ManyToOne
+	 */
+	protected $file;
+
 	public function __construct(){
 		$this->created = new \DateTime();
 		$this->moved = new \DateTime();
@@ -206,6 +212,21 @@ class Ticket {
 
 	public function setColumn($column){
 		$this->slot = $column;
+	}
+
+	/**
+	 * @param \TYPO3\Flow\Resource\Resource $file
+	 * @return void
+	 */
+	public function setFile(\TYPO3\Flow\Resource\Resource $file) {
+		$this->file = $file;
+	}
+
+	/**
+	 * @return \TYPO3\Flow\Resource\Resource
+	 */
+	public function getFile() {
+		return $this->file;
 	}
 }
 ?>

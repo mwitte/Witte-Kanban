@@ -29,12 +29,12 @@
 		<div class="row-fluid">
 			<dl>
 				<f:if condition="{ticket.column.isFirst} == 1">
-					<dt>created:</dt>
+					<dt><f:translate id="ticket.created"/>:</dt>
 					<dd><f:format.date>{ticket.created}</f:format.date></dd>
 				</f:if>
 				<f:if condition="{ticket.column.isFirst} != {ticket.column.isLast}">
 					<f:else>
-						<dt>started: </dt>
+						<dt><f:translate id="ticket.started"/>: </dt>
 						<dd><f:format.date>{ticket.started}</f:format.date></dd>
 					</f:else>
 				</f:if>
@@ -51,6 +51,12 @@
 					<dd>{ticket.version}</dd>
 				</f:if>
 			</dl>
+			<f:if condition="{ticket.file}">
+				<p>
+					<a target="_blank" href="{f:uri.resource(resource: ticket.file)}">File</a>
+				</p>
+			</f:if>
+
 			<f:if condition="{ticket.column.isLast} == 1">
 			<f:link.action class="btn btn-small btn-inverse pull-right" action="archiving" controller="Ticket" arguments="{ticket: ticket}">
 				<i class="icon-folder-open icon-white"></i> <f:translate id="ticket.btn.archive"/>
